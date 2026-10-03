@@ -30,11 +30,7 @@ class BeritaController extends Controller
             ->latest()
             ->get();
 
-        return view('admin.berita.index', compact(
-            'beritas',
-            'search',
-            'status'
-        ));
+            return view('admin.berita.index', compact('beritas','search','status'));
     }
 
     /**
@@ -56,6 +52,7 @@ class BeritaController extends Controller
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'status' => 'required|in:Publish,Draft',
+            'slug' => 'required|unique:berita,slug',
         ]);
 
         $gambar = null;
@@ -76,6 +73,7 @@ class BeritaController extends Controller
             'gambar' => $gambar,
             'status' => $request->status,
             'id_user' => $user->id_user,
+            'slug' => $request->slug,
         ]);
 
         return redirect()->route('admin.berita')->with('success', 'Berita berhasil ditambahkan.');

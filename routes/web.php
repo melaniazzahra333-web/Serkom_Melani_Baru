@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EkstrakurikulerController;
@@ -119,6 +120,8 @@ Route::middleware('auth.admin')->group(function () {
 // Route::get('/', function () {
 //     return redirect()->route('login');
 // });
-Route::get('/', function () {
-    return view('landing.index');
-});
+// Route::get('/', function () {
+//     return view('landing.index');
+// });
+
+Route::get('/', [LandingController::class, 'index'])->name('home');

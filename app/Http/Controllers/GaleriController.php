@@ -10,7 +10,7 @@ class GaleriController extends Controller
     public function index(Request $request)
     {
          $search = $request->search;
-    $kategori = $request->kategori;
+        $kategori = $request->kategori;
 
     $galeris = Galeri::query()
         ->when($search, function ($query) use ($search) {

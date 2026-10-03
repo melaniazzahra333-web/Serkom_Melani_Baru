@@ -10,10 +10,6 @@ class LoginController extends Controller
 {
     public function showLogin()
     {
-        // if (session()->has('login')) {
-        //     return redirect()->route('admin.dashboard');
-        // }
-
         return view('auth.login');
     }
 
