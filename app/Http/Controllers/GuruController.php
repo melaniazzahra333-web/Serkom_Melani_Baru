@@ -136,4 +136,13 @@ class GuruController extends Controller
         return redirect()->route('admin.guru');
     }
 
+    public function stafGuru()
+{
+    $gurus = Guru::orderBy('created_at', 'asc')->paginate(8);
+
+    return view('landing.staf-guru', [
+        'gurus' => $gurus
+    ]);
+}
+
 }

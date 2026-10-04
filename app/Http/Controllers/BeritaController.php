@@ -52,7 +52,7 @@ class BeritaController extends Controller
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'status' => 'required|in:Publish,Draft',
-            'slug' => 'required|unique:berita,slug',
+            // 'slug' => 'required|unique:berita,slug', 
         ]);
 
         $gambar = null;

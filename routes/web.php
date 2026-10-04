@@ -124,4 +124,8 @@ Route::middleware('auth.admin')->group(function () {
 //     return view('landing.index');
 // });
 
+// halaman Staf & Guru
+Route::get('/staf-guru', [GuruController::class, 'stafGuru'])->name('staf.guru');
+
+
 Route::get('/', [LandingController::class, 'index'])->name('home');

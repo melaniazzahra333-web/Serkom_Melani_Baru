@@ -1,103 +1,399 @@
-.hover-card {
-            transition:transform .3s ease,box-shadow .3s ease;
-        }
+/* =========================
+   UMUM
+========================= */
 
-        .hover-card:hover {
-            transform:translateY(-8px);
-            box-shadow:0 10px 25px rgba(0,0,0,.12);
-        }
-/* CARD KEUNGGULAN */
-.keunggulan-card {
-    border: 1px solid #eee;
-    border-radius: 14px;
-    text-align: center;
-    padding: 65px 35px 25px;
-    position: relative;
-    height: 100%;
-    transition: all 0.3s ease;
+html{
+    scroll-behavior:smooth;
 }
 
-.keunggulan-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+body{
+    margin:0;
+    padding-top:76px;
+    font-family:Arial,sans-serif;
+    color:#333;
 }
 
-/* ICON */
-.keunggulan-icon {
-    width: 62px;
-    height: 62px;
-    background: #0866b3;
-    color: white;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 8px 20px rgba(8, 102, 179, 0.25);
-    transition: all 0.3s ease;
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    background:#fff;
+    box-shadow:0 4px 15px rgba(0,0,0,.10);
+    z-index:1000;
 }
 
-.keunggulan-icon i {
-    font-size: 27px;
+.navbar-brand{
+    color:#0866b3 !important;
 }
 
-.keunggulan-card:hover .keunggulan-icon {
-    transform: translate(-50%, -50%) scale(1.1);
+.navbar .nav-link{
+    color:#0866b3;
+    white-space:nowrap;
+    padding-left:10px;
+    padding-right:10px;
+    transition:.3s;
 }
 
-/* JUDUL */
-.keunggulan-card h4 {
-    font-size: 21px;
-    font-weight: 600;
-    color: #3d3d3d;
-    margin-bottom: 20px;
+.navbar .nav-link:hover{
+    color:#e58b00;
 }
 
-/* TEXT */
-.keunggulan-card p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #444;
-    margin: 0;
-}
-/* CARD GURU */
-
-.guru-card {
-    border: none;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.3s ease;
+.navbar .nav-link.show{
+    color:#0866b3;
+    font-weight:600;
+    border-bottom:3px solid #0866b3;
 }
 
-.guru-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+
+/* =========================
+   DROPDOWN NAVBAR
+========================= */
+
+.navbar .dropdown-menu{
+    border:0;
+    border-radius:12px;
+    padding:8px;
+    margin-top:10px;
+    min-width:180px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
-.guru-card img {
-    transition: all 0.3s ease;
+.navbar .dropdown-item{
+    border-radius:8px;
+    padding:10px 14px;
+    color:#333;
+    font-size:15px;
+    transition:.25s;
 }
 
-.guru-card:hover img {
-    transform: scale(1.05);
+.navbar .dropdown-item:hover{
+    background:#eaf4ff;
+    color:#0866b3;
+    padding-left:18px;
 }
 
-.eskul-card{display:flex;height:220px;border:1px solid #eee;border-radius:14px;overflow:hidden;background:#fff;transition:.3s}
-.eskul-card:hover{transform:translateY(-7px);box-shadow:0 10px 25px rgba(0,0,0,.12)}
-.eskul-card img{width:50%;object-fit:cover;transition:.3s}
-.eskul-card:hover img{transform:scale(1.05)}
-.eskul-info{width:50%;padding:45px 18px}
-.eskul-info h4{font-size:19px;color:#444;margin-bottom:12px}
-.eskul-info p{font-size:14px;color:#888;margin-bottom:8px}
-.eskul-info i{color:#0863aa;margin-right:5px}
-.eskul-info a{font-size:14px;color:#444}
 
-.galeri-card{background:#fff;border-radius:14px;overflow:hidden;transition:.3s}
-.galeri-card:hover{transform:translateY(-7px);box-shadow:0 10px 25px rgba(0,0,0,.12)}
-.galeri-card img{width:100%;height:230px;object-fit:cover;display:block;transition:.3s}
-.galeri-card:hover img{transform:scale(1.05)}
-.galeri-card h5{font-size:17px;font-weight:600;line-height:1.4;color:#444;margin:0}
-.galeri-jumlah{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:4px;font-size:13px}
+/* =========================
+   BANNER
+========================= */
+
+#banner img{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+}
+
+
+/* =========================
+   SAMBUTAN KEPALA SEKOLAH
+========================= */
+
+.kepala-sekolah-img{
+    overflow:hidden;
+    border-radius:12px;
+}
+
+.kepala-sekolah-img img{
+    width:100%;
+    max-height:340px;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+}
+
+.kepala-sekolah-img:hover img{
+    transform:scale(1.08);
+}
+
+
+/* =========================
+   CARD PENGUMUMAN
+   PRESTASI
+   BERITA
+========================= */
+
+.info-card{
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    overflow:hidden;
+    transition:transform .3s ease,box-shadow .3s ease;
+}
+
+.info-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.info-img{
+    width:100%;
+    height:150px;
+    overflow:hidden;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+
+.info-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+}
+
+.info-img:hover img{
+    transform:scale(1.08);
+}
+
+
+/* =========================
+   CARD KEUNGGULAN
+========================= */
+
+.keunggulan-card{
+    border:1px solid #eee;
+    border-radius:14px;
+    text-align:center;
+    padding:65px 35px 25px;
+    position:relative;
+    height:100%;
+    transition:transform .3s ease,box-shadow .3s ease;
+}
+
+.keunggulan-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.keunggulan-icon{
+    width:62px;
+    height:62px;
+    background:#0866b3;
+    color:#fff;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translate(-50%,-50%);
+    box-shadow:0 8px 20px rgba(8,102,179,.25);
+    transition:transform .3s ease;
+}
+
+.keunggulan-icon i{
+    font-size:27px;
+}
+
+.keunggulan-card:hover .keunggulan-icon{
+    transform:translate(-50%,-50%) scale(1.1);
+}
+
+.keunggulan-card h4{
+    font-size:21px;
+    font-weight:600;
+    color:#3d3d3d;
+    margin-bottom:20px;
+}
+
+.keunggulan-card p{
+    font-size:15px;
+    line-height:1.6;
+    color:#444;
+    margin:0;
+}
+
+
+/* =========================
+   GURU & STAF
+========================= */
+
+.guru-card{
+    border:1px solid #d9e2ec;
+    border-radius:16px;
+    overflow:hidden;
+    background:#fff;
+    transition:transform .3s ease,box-shadow .3s ease;
+}
+
+.guru-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.guru-card img{
+    transition:.4s;
+}
+
+.guru-card:hover img{
+    transform:scale(1.05);
+}
+.guru-card .card-body{
+    min-height:110px;
+}
+
+
+/* =========================
+   EKSTRAKURIKULER
+========================= */
+
+.eskul-card{
+    display:flex;
+    height:220px;
+    border:1px solid #eee;
+    border-radius:14px;
+    overflow:hidden;
+    background:#fff;
+    transition:.3s;
+}
+
+.eskul-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+.eskul-card img{
+    width:50%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.eskul-card:hover img{
+    transform:scale(1.05);
+}
+
+.eskul-info{
+    width:50%;
+    padding:30px 20px;
+}
+
+.eskul-info h4{
+    font-size:22px;
+    font-weight:700;
+    color:#0863aa;
+    margin:0 0 18px;
+    padding-bottom:10px;
+    border-bottom:3px solid #e9a000;
+    display:inline-block;
+}
+
+.eskul-info p{
+    font-size:14px;
+    color:#777;
+    margin-bottom:9px;
+}
+
+.eskul-info i{
+    width:20px;
+    color:#0863aa;
+    margin-right:5px;
+}
+
+.eskul-info a{
+    display:inline-block;
+    margin-top:5px;
+    font-size:14px;
+    color:#0863aa;
+    text-decoration:none;
+}
+
+.eskul-info a:hover{
+    color:#e9a000;
+}
+
+
+/* =========================
+   GALERI
+========================= */
+
+.galeri-card{
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    transition:transform .3s ease,box-shadow .3s ease;
+}
+
+.galeri-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+.galeri-card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+}
+
+.galeri-card:hover img{
+    transform:scale(1.05);
+}
+
+.galeri-card h5{
+    font-size:17px;
+    font-weight:600;
+    line-height:1.4;
+    color:#444;
+    margin:0;
+}
+
+.galeri-jumlah{
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    background:rgba(0,0,0,.5);
+    color:#fff;
+    padding:4px 8px;
+    border-radius:4px;
+    font-size:13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:991px){
+
+    .navbar .nav-link{
+        padding:10px 5px;
+    }
+
+    #banner img{
+        height:320px;
+    }
+
+}
+
+@media(max-width:767px){
+
+    body{
+        padding-top:70px;
+    }
+
+    #banner img{
+        height:240px;
+    }
+
+    .eskul-card{
+        height:auto;
+        display:block;
+    }
+
+    .eskul-card img,
+    .eskul-info{
+        width:100%;
+    }
+
+    .eskul-card img{
+        height:200px;
+    }
+
+    .eskul-info{
+        padding:25px;
+    }
+
+}
