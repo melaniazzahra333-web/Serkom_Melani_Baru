@@ -10,10 +10,6 @@ class GuruController extends Controller
      */
     public function index(Request $request)
     {
-        // $gurus = Guru::all();
-
-        // return view('admin.guru.index', compact('gurus'));
-
         $search = $request->search;
 
         $gurus = Guru::query()

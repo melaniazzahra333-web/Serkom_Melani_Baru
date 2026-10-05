@@ -4,494 +4,120 @@
 
 <div class="container-fluid">
 
-    {{-- HEADER --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
-
         <div>
-
-            <h2 class="fw-bold mb-1">
-                <i class="fas fa-medal me-2"></i>
-                Data Prestasi
-            </h2>
-
-            <p class="text-muted mb-0">
-                Kelola data prestasi dan pencapaian sekolah
-            </p>
-
+            <h2 class="fw-bold mb-1" style="color:#244D73;"><i class="fa-solid fa-trophy me-2"></i>Data Prestasi</h2>
+            <p class="text-muted mb-0">Kelola data prestasi sekolah</p>
         </div>
 
-        <a href="{{ route('admin.prestasi.create') }}"
-           class="btn btn-primary px-4">
-
-            <i class="fas fa-plus me-2"></i>
-            Tambah Prestasi
-
-        </a>
-
+        @if(session('user_role') === 'Admin')
+            <a href="{{ route('admin.prestasi.create') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus me-1"></i>Tambah Prestasi
+            </a>
+        @endif
     </div>
 
+    @if(session('success'))
+        <div class="alert alert-success">
+            <i class="fa-solid fa-circle-check me-2"></i>{{ session('success') }}
+        </div>
+    @endif
 
-    {{-- CARD --}}
     <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
 
-        <div class="card-body p-4">
-
-
-            {{-- SEARCH + JUMLAH PRESTASI --}}
-            <div class="d-flex align-items-center gap-2 mb-4 w-100">
-
-                <form action="{{ route('admin.prestasi') }}"
-                      method="GET"
-                      class="d-flex flex-grow-1">
-
-                    <div class="input-group w-100">
-
-                        <span class="input-group-text bg-white">
-                            <i class="fa-solid fa-magnifying-glass text-muted"></i>
-                        </span>
-
-                        <input
-                            type="text"
-                            name="search"
-                            class="form-control"
-                            placeholder="Cari prestasi..."
-                            value="{{ $search ?? '' }}"
-                        >
-
-                    </div>
-
-
-                    @if(!empty($search))
-
-                        <a href="{{ route('admin.prestasi') }}"
-                           class="btn btn-secondary ms-2">
-
-                            Reset
-
-                        </a>
-
-                    @endif
-
-                </form>
-
-
-                {{-- JUMLAH PRESTASI --}}
-                <span class="badge rounded-pill flex-shrink-0"
-                      style="
-                          background-color: #d8ece8;
-                          color: #2474a6;
-                          padding: 8px 16px;
-                      ">
-
-                    {{ $prestasis->count() }} Prestasi
-
-                </span>
-
-            </div>
-
-
-            {{-- PESAN SUKSES --}}
-            @if(session('success'))
-
-                <div class="alert alert-success alert-dismissible fade show"
-                     role="alert">
-
-                    <i class="fas fa-check-circle me-2"></i>
-
-                    {{ session('success') }}
-
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert">
-                    </button>
-
+            <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+                <div>
+                    <h5 class="fw-bold mb-1" style="color:#244D73;">Daftar Prestasi</h5>
+                    <small class="text-muted">Data prestasi yang terdaftar</small>
                 </div>
 
-            @endif
+                <div class="d-flex gap-2">
+                    <form action="{{ route('admin.prestasi') }}" method="GET" class="d-flex">
+                        <input type="text" name="search" class="form-control" placeholder="Cari prestasi..." value="{{ $search ?? '' }}">
+                        <button class="btn btn-primary ms-2">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                    </form>
 
+                    @if(!empty($search))
+                        <a href="{{ route('admin.prestasi') }}" class="btn btn-secondary">Reset</a>
+                    @endif
 
-            {{-- TABEL --}}
+                    <span class="badge rounded-pill align-content-center" style="background:#C8DFDB;color:#3368A0;">
+                        {{ $prestasis->count() }} Prestasi
+                    </span>
+                </div>
+            </div>
+
             <div class="table-responsive">
-
-                <table class="table align-middle mb-0">
-
-                    <thead>
-
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
                         <tr>
+                            <th>No</th>
+                            <th>Foto</th>
+                            <th>Deskripsi</th>
+                            <th>Tahun Ajaran</th>
 
-                            <th style="width:70px;">
-                                No
-                            </th>
-
-                            <th style="width:180px;">
-                                Foto
-                            </th>
-
-                           <th style="width:35%;">
-                                Deskripsi
-                            </th>
-
-                            <th style="width:160px;">
-                                Tahun Ajaran
-                            </th>
-
-                            <th style="width:150px;text-align:center;">
-                                Aksi
-                            </th>
-
+                            @if(session('user_role') === 'Admin')
+                                <th>Aksi</th>
+                            @endif
                         </tr>
-
                     </thead>
 
-
                     <tbody>
-
                         @forelse($prestasis as $prestasi)
-
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
 
-                                {{-- NO --}}
                                 <td>
-                                    {{ $loop->iteration }}
-                                </td>
-
-
-                                {{-- FOTO --}}
-                                <td>
-
                                     @if($prestasi->foto)
-
-                                        <img
-                                            src="{{ asset('storage/' . $prestasi->foto) }}"
-                                            alt="Foto Prestasi"
-                                            style="
-                                                width:100px;
-                                                height:100px;
-                                                object-fit:cover;
-                                                border-radius:8px;
-                                            "
-                                        >
-
+                                        <img src="{{ asset('storage/'.$prestasi->foto) }}" width="80" height="60" style="object-fit:cover;border-radius:8px;">
                                     @else
-
-                                        <div
-                                            style="
-                                                width:120px;
-                                                height:80px;
-                                                border-radius:8px;
-                                                background:#f1f3f5;
-                                                display:flex;
-                                                align-items:center;
-                                                justify-content:center;
-                                                color:#999;
-                                                font-size:13px;
-                                            "
-                                        >
-
-                                            Tidak ada foto
-
-                                        </div>
-
+                                        <i class="fa-solid fa-image fs-3 text-secondary"></i>
                                     @endif
-
                                 </td>
 
+                                <td>{{ $prestasi->deskripsi }}</td>
 
-                                {{-- DESKRIPSI --}}
-                                <td style="width:35%;">
-
-                                    {{ $prestasi->deskripsi }}
-
-                                </td>
-
-
-                                {{-- TAHUN AJARAN --}}
                                 <td>
-
-                                    {{ $prestasi->tahun_ajaran }}
-
+                                    <span class="badge" style="background:#EEF5F4;color:#3368A0;">
+                                        {{ $prestasi->tahun_ajaran }}
+                                    </span>
                                 </td>
 
+                                @if(session('user_role') === 'Admin')
+                                    <td>
+                                        <a href="{{ route('admin.prestasi.edit', $prestasi->id_prestasi) }}" class="btn btn-sm btn-warning" title="Edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
 
-                                {{-- AKSI --}}
-                                <td>
-
-                                    <div class="d-flex justify-content-center gap-2">
-
-                                        {{-- EDIT --}}
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm btn-warning"
-                                            title="Edit"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editPrestasi{{ $prestasi->id_prestasi }}"
-                                        >
-
-                                            <i class="fas fa-edit"></i>
-
-                                        </button>
-
-
-                                        {{-- HAPUS --}}
-                                        <form
-                                            action="{{ route('admin.prestasi.destroy', $prestasi->id_prestasi) }}"
-                                            method="POST"
-                                            class="form-hapus"
-                                        >
-
+                                        <form action="{{ route('admin.prestasi.destroy', $prestasi->id_prestasi) }}" method="POST" class="d-inline form-hapus">
                                             @csrf
-
                                             @method('DELETE')
-
-                                            <button
-                                                type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                title="Hapus"
-                                            >
-
-                                                <i class="fas fa-trash"></i>
-
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="fa-solid fa-trash"></i>
                                             </button>
-
                                         </form>
-
-                                    </div>
-
-                                </td>
-
+                                    </td>
+                                @endif
                             </tr>
 
                         @empty
-
                             <tr>
-
-                                <td colspan="5">
-
-                                    <div class="text-center py-5">
-
-                                        <i
-                                            class="fas fa-medal mb-3"
-                                            style="
-                                                font-size:42px;
-                                                color:#66a3bf;
-                                            "
-                                        ></i>
-
-                                        <h5 class="fw-bold mb-2">
-                                            Belum ada prestasi
-                                        </h5>
-
-                                        <p class="text-muted mb-0">
-                                            Silakan tambahkan data prestasi.
-                                        </p>
-
-                                    </div>
-
+                                <td colspan="{{ session('user_role') === 'Admin' ? 5 : 4 }}" class="text-center py-5">
+                                    <i class="fa-solid fa-trophy fs-1 text-secondary"></i>
+                                    <p class="text-muted mb-0">Belum ada data prestasi.</p>
                                 </td>
-
                             </tr>
-
                         @endforelse
-
                     </tbody>
-
                 </table>
-
             </div>
 
         </div>
-
     </div>
 
 </div>
-
-
-{{-- MODAL EDIT PRESTASI --}}
-@foreach($prestasis as $prestasi)
-
-<div class="modal fade"
-     id="editPrestasi{{ $prestasi->id_prestasi }}"
-     tabindex="-1"
-     aria-hidden="true">
-
-    <div class="modal-dialog modal-dialog-centered">
-
-        <div class="modal-content border-0 shadow-lg"
-             style="border-radius:15px;">
-
-            <div class="modal-header">
-
-                <h5 class="modal-title fw-bold"
-                    style="color:#244D73;">
-
-                    <i class="fas fa-medal me-2"
-                       style="color:#244D73;"></i>
-
-                    Edit Prestasi
-
-                </h5>
-
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal">
-                </button>
-
-            </div>
-
-
-            <div class="modal-body">
-
-                <form
-                    action="{{ route('admin.prestasi.update', $prestasi->id_prestasi) }}"
-                    method="POST"
-                    enctype="multipart/form-data"
-                >
-
-                    @csrf
-
-                    @method('PUT')
-
-
-                    {{-- DESKRIPSI --}}
-
-                    <div class="mb-3">
-
-                        <label class="form-label fw-semibold">
-
-                            <i class="fas fa-align-left me-1"
-                               style="color:#244D73;"></i>
-
-                            Deskripsi Prestasi
-
-                        </label>
-
-                        <textarea
-                            name="deskripsi"
-                            class="form-control"
-                            rows="5"
-                            required
-                        >{{ $prestasi->deskripsi }}</textarea>
-
-                    </div>
-
-
-                    {{-- TAHUN AJARAN --}}
-
-                    <div class="mb-3">
-
-                        <label class="form-label fw-semibold">
-
-                            <i class="fas fa-calendar me-1"
-                               style="color:#244D73;"></i>
-
-                            Tahun Ajaran
-
-                        </label>
-
-                        <input
-                            type="text"
-                            name="tahun_ajaran"
-                            class="form-control"
-                            value="{{ $prestasi->tahun_ajaran }}"
-                            placeholder="Contoh: 2025/2026"
-                            required
-                        >
-
-                    </div>
-
-
-                    {{-- FOTO --}}
-
-                    <div class="mb-3">
-
-                        <label class="form-label fw-semibold">
-
-                            <i class="fas fa-image me-1"
-                               style="color:#244D73;"></i>
-
-                            Foto Prestasi
-
-                        </label>
-
-                        <input
-                            type="file"
-                            name="foto"
-                            class="form-control"
-                            accept="image/*"
-                        >
-
-                    </div>
-
-
-                    {{-- FOTO SAAT INI --}}
-
-                    @if($prestasi->foto)
-
-                        <div class="mb-4">
-
-                            <p class="fw-semibold mb-2">
-
-                                Foto Saat Ini:
-
-                            </p>
-
-                            <img
-                                src="{{ asset('storage/' . $prestasi->foto) }}"
-                                alt="Foto Prestasi"
-                                style="
-                                    width:180px;
-                                    height:120px;
-                                    object-fit:cover;
-                                    border-radius:8px;
-                                "
-                            >
-
-                        </div>
-
-                    @endif
-
-
-                    {{-- BUTTON --}}
-
-                    <div class="d-flex justify-content-end gap-2 mt-4">
-
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                        >
-
-                            <i class="fas fa-xmark me-1"></i>
-
-                            Batal
-
-                        </button>
-
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary"
-                        >
-
-                            <i class="fas fa-save me-1"></i>
-
-                            Simpan Perubahan
-
-                        </button>
-
-                    </div>
-
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-@endforeach
 
 @endsection

@@ -15,10 +15,17 @@
 
     @include('landing.navbar')
 
-    <section style="padding:130px 0 60px;background:#f5f8fb;">
+    <section style="padding:50px 0 60px;background:#f5f8fb;">
         <div class="container">
 
-            <div class="text-center mb-5">
+            <!-- Breadcrumb -->
+            <div style="padding-bottom:18px;border-bottom:1px solid #eee;margin-bottom:30px;">
+                <a href="{{ url('/') }}" style="text-decoration:none;color:#333;font-size:14px;">Beranda</a>
+                <span style="color:#777;font-size:14px;"> » Pengumuman</span>
+            </div>
+
+            <!-- Judul -->
+            <div style="margin-bottom:35px;">
                 <div style="font-size:14px;letter-spacing:2px;color:#e99b00;">
                     INFORMASI SEKOLAH
                 </div>
@@ -27,7 +34,7 @@
                     Pengumuman
                 </h2>
 
-                <div style="width:200px;height:4px;background:#e9a000;margin:14px auto 0;"></div>
+                <div style="width:200px;height:4px;background:#e9a000;margin:14px 0 0;"></div>
             </div>
 
             <div class="row g-4">

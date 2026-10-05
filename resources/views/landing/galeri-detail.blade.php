@@ -14,10 +14,26 @@
 
     @include('landing.navbar')
 
-    <section style="padding:130px 0 60px;background:#f5f8fb;min-height:80vh;">
+    <section style="padding:50px 0 60px;background:#f5f8fb;min-height:80vh;">
         <div class="container">
 
-            <div class="text-center mb-5">
+            <!-- Breadcrumb -->
+            <div style="padding-bottom:18px;border-bottom:1px solid #eee;margin-bottom:30px;">
+                <a href="{{ url('/') }}" style="text-decoration:none;color:#333;font-size:14px;">
+                    Beranda
+                </a>
+
+                <span style="color:#777;font-size:14px;">
+                    » <a href="{{ route('galeri') }}" style="text-decoration:none;color:#333;">Foto & Video</a>
+                </span>
+
+                <span style="color:#777;font-size:14px;">
+                    » {{ $galeris->first()->judul ?? 'Detail Galeri' }}
+                </span>
+            </div>
+
+            <!-- Judul -->
+            <div style="margin-bottom:35px;">
                 <div style="font-size:14px;letter-spacing:2px;color:#e99b00;">
                     DOKUMENTASI KEGIATAN
                 </div>
@@ -26,7 +42,7 @@
                     {{ $galeris->first()->judul ?? 'Detail Galeri' }}
                 </h2>
 
-                <div style="width:200px;height:4px;background:#e9a000;margin:14px auto 0;"></div>
+                <div style="width:200px;height:4px;background:#e9a000;margin:14px 0 0;"></div>
             </div>
 
             <div class="row g-4">
@@ -34,6 +50,7 @@
                 @forelse($galeris as $galeri)
 
                     <div class="col-lg-4 col-md-6">
+
                         <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);">
 
                             @if($galeri->kategori == 'Foto')
@@ -52,6 +69,7 @@
                             @endif
 
                         </div>
+
                     </div>
 
                 @empty
@@ -66,12 +84,7 @@
 
             </div>
 
-            <div class="text-center mt-5">
-                <a href="{{ url()->previous() }}" class="btn btn-primary">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    Kembali
-                </a>
-            </div>
+            
 
         </div>
     </section>

@@ -100,22 +100,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Nama</label>
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-user me-1" style="color:#244D73;"></i>Nama</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Username</label>
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-at me-1" style="color:#244D73;"></i>Username</label>
                         <input type="text" name="username" class="form-control" value="{{ old('username', $user->username) }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Password Baru</label>
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-lock me-1" style="color:#244D73;"></i>Password Baru</label>
                         <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengganti password">
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Role</label>
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-user-shield me-1" style="color:#244D73;"></i>Role</label>
                         <input type="text" class="form-control" value="{{ $user->role }}" readonly>
                     </div>
 

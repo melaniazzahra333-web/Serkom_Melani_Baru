@@ -1,735 +1,233 @@
 @extends('layouts.admin')
 
 @section('content')
-
 <div class="container-fluid">
-
-    {{-- HEADER --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
-
         <div>
-            <h2 class="fw-bold mb-1" style="color:#244D73;">
-                <i class="fa-solid fa-school me-2"></i>
-                Profil Sekolah
-            </h2>
-
-            <p class="text-muted mb-0">
-                Kelola informasi lengkap tentang sekolah
-            </p>
+            <h2 class="fw-bold mb-1" style="color:#244D73;"><i class="fa-solid fa-school me-2"></i>Profil Sekolah</h2>
+            <p class="text-muted mb-0">Kelola informasi lengkap tentang sekolah</p>
         </div>
-
         @if(!$profil)
-
-            <a href="{{ route('admin.profil.create') }}"
-               class="btn btn-primary">
-
-                <i class="fa-solid fa-plus me-1"></i>
-                Tambah Profil
-
+            <a href="{{ route('admin.profil.create') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus me-1"></i>Tambah Profil
             </a>
-
         @endif
-
     </div>
 
-
-    {{-- NOTIFIKASI --}}
     @if(session('success'))
-
-        <div class="alert alert-success">
-            <i class="fa-solid fa-circle-check me-2"></i>
-            {{ session('success') }}
+        <div class="alert alert-success border-0 shadow-sm">
+            <i class="fa-solid fa-circle-check me-2"></i>{{ session('success') }}
         </div>
-
     @endif
 
-
-    {{-- DATA PROFIL --}}
     @if($profil)
 
-    <div class="card border-0 shadow-sm">
-
+    {{-- DATA PROFIL SEKOLAH --}}
+    <div class="card border-0 shadow-sm overflow-hidden" style="border-radius:20px;">
         <div class="card-body p-0">
-
-            {{-- HEADER CARD --}}
-            <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
-
-                <div>
-                    <h5 class="fw-bold mb-1" style="color:#244D73;">
-                        Data Profil Sekolah
-                    </h5>
-
-                    <small class="text-muted">
-                        Informasi lengkap mengenai sekolah
-                    </small>
-                </div>
-
-                <span class="badge rounded-pill"
-                      style="background:#C8DFDB;color:#3368A0;">
-
-                    <i class="fa-solid fa-circle-info me-1"></i>
-                    Profil Sekolah
-
-                </span>
-
-            </div>
-
-
-            {{-- CONTENT --}}
-            <div class="card-body">
-
-                <div class="row g-4">
-
-                    {{-- FOTO & LOGO --}}
-                    <div class="col-md-4 text-center">
-
-                        @if($profil->logo)
-
-                            <div class="mb-3">
-
-                                <img
-                                    src="{{ asset('storage/' . $profil->logo) }}"
-                                    width="100"
-                                    height="100"
-                                    style="object-fit:contain;"
-                                    class="rounded"
-                                    alt="Logo Sekolah"
-                                >
-
-                            </div>
-
-                        @endif
-
-
-                        @if($profil->foto)
-
-                            <img
-                                src="{{ asset('storage/' . $profil->foto) }}"
-                                width="100%"
-                                height="220"
-                                style="object-fit:cover;"
-                                class="rounded"
-                                alt="Foto Sekolah"
-                            >
-
-                        @else
-
-                            <div class="border rounded d-flex align-items-center justify-content-center"
-                                 style="height:220px;background:#F8F9FA;">
-
-                                <i class="fa-solid fa-school fs-1 text-secondary"></i>
-
-                            </div>
-
-                        @endif
-
-
-                        <h4 class="fw-bold mt-3 mb-1" style="color:#244D73;">
-                            {{ $profil->nama_sekolah }}
-                        </h4>
-
-                        <small class="text-muted">
-                            Profil Sekolah
-                        </small>
-
-                    </div>
-
-
-                    {{-- INFORMASI SEKOLAH --}}
-                    <div class="col-md-8">
-
-                        <div class="table-responsive">
-
-                            <table class="table table-hover align-middle">
-
-                                <tbody>
-
-                                    <tr>
-                                        <th style="width:35%;color:#244D73;">
-                                            <i class="fa-solid fa-school me-2"></i>
-                                            Nama Sekolah
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->nama_sekolah }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th style="color:#244D73;">
-                                            <i class="fa-solid fa-user-tie me-2"></i>
-                                            Kepala Sekolah
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->kepala_sekolah }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th style="color:#244D73;">
-                                            <i class="fa-solid fa-id-card me-2"></i>
-                                            NPSN
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->npsn }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th style="color:#244D73;">
-                                            <i class="fa-solid fa-location-dot me-2"></i>
-                                            Alamat
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->alamat }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th style="color:#244D73;">
-                                            <i class="fa-solid fa-phone me-2"></i>
-                                            Kontak
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->kontak }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th style="color:#244D73;">
-                                            <i class="fa-solid fa-calendar me-2"></i>
-                                            Tahun Berdiri
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->tahun_berdiri }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th style="color:#244D73;">
-                                            <i class="fa-solid fa-eye me-2"></i>
-                                            Visi & Misi
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->visi_misi }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <th style="color:#244D73;">
-                                            <i class="fa-solid fa-align-left me-2"></i>
-                                            Deskripsi
-                                        </th>
-
-                                        <td>
-                                            {{ $profil->deskripsi }}
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-
-
-                        {{-- AKSI --}}
-                        <div class="text-end mt-3">
-
-                            <button
-                                type="button"
-                                class="btn btn-warning"
-                                data-bs-toggle="modal"
-                                data-bs-target="#editProfilModal"
-                            >
-
-                                <i class="fa-solid fa-pen me-1"></i>
-                                Edit
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    {{-- MODAL EDIT PROFIL --}}
-    <div class="modal fade"
-         id="editProfilModal"
-         tabindex="-1"
-         aria-labelledby="editProfilModalLabel"
-         aria-hidden="true">
-
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-
-            <div class="modal-content border-0 shadow-lg"
-                 style="border-radius:18px;">
-
-                {{-- MODAL HEADER --}}
-                <div class="modal-header border-0 px-4 pt-4">
-
+            <div class="p-4 border-bottom">
+                <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h5 class="modal-title fw-bold"
-                            id="editProfilModalLabel"
-                            style="color:#244D73;">
-
-                            <i class="fa-solid fa-pen-to-square me-2"></i>
-                            Edit Profil Sekolah
-
-                        </h5>
-
-                        <small class="text-muted">
-                            Ubah informasi profil sekolah
-                        </small>
+                        <h5 class="fw-bold mb-1" style="color:#244D73;"><i class="fa-solid fa-building-columns me-2"></i>Data Profil Sekolah</h5>
+                        <small class="text-muted">Informasi lengkap mengenai sekolah</small>
                     </div>
-
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close">
-                    </button>
-
+                    <span class="badge rounded-pill px-3 py-2" style="background:#EAF3FA;color:#244D73;">
+                        <i class="fa-solid fa-circle-info me-1"></i>Profil Sekolah
+                    </span>
                 </div>
+            </div>
 
+            <div class="p-4">
+                <div class="row g-4 align-items-stretch">
 
-                {{-- MODAL BODY --}}
-                <div class="modal-body px-4 pb-4">
+                    {{-- FOTO SEKOLAH --}}
+                    <div class="col-lg-4">
+                        <div class="h-100 text-center p-3" style="background:#F7FAFC;border-radius:18px;border:1px solid #edf1f5;">
 
-                    {{-- ERROR VALIDATION --}}
-                    @if ($errors->any())
-
-                        <div class="alert alert-danger">
-
-                            <strong>
-                                <i class="fa-solid fa-triangle-exclamation me-1"></i>
-                                Data belum berhasil disimpan.
-                            </strong>
-
-                            <ul class="mb-0 mt-2">
-
-                                @foreach ($errors->all() as $error)
-
-                                    <li>{{ $error }}</li>
-
-                                @endforeach
-
-                            </ul>
-
-                        </div>
-
-                    @endif
-
-
-                    <form
-                        action="{{ route('admin.profil.update', $profil->id_profil) }}"
-                        method="POST"
-                        enctype="multipart/form-data"
-                    >
-
-                        @csrf
-                        @method('PUT')
-
-
-                        <div class="row">
-
-                            {{-- NAMA SEKOLAH --}}
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-school me-1"></i>
-                                    Nama Sekolah
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="nama_sekolah"
-                                    class="form-control @error('nama_sekolah') is-invalid @enderror"
-                                    value="{{ old('nama_sekolah', $profil->nama_sekolah) }}"
-                                    required
-                                >
-
-                                @error('nama_sekolah')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- KEPALA SEKOLAH --}}
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-user-tie me-1"></i>
-                                    Kepala Sekolah
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="kepala_sekolah"
-                                    class="form-control @error('kepala_sekolah') is-invalid @enderror"
-                                    value="{{ old('kepala_sekolah', $profil->kepala_sekolah) }}"
-                                    required
-                                >
-
-                                @error('kepala_sekolah')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- NPSN --}}
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-id-card me-1"></i>
-                                    NPSN
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="npsn"
-                                    class="form-control @error('npsn') is-invalid @enderror"
-                                    value="{{ old('npsn', $profil->npsn) }}"
-                                    required
-                                >
-
-                                @error('npsn')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- TAHUN BERDIRI --}}
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-calendar me-1"></i>
-                                    Tahun Berdiri
-                                </label>
-
-                                <input
-                                    type="number"
-                                    name="tahun_berdiri"
-                                    class="form-control @error('tahun_berdiri') is-invalid @enderror"
-                                    value="{{ old('tahun_berdiri', $profil->tahun_berdiri) }}"
-                                    required
-                                >
-
-                                @error('tahun_berdiri')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- ALAMAT --}}
-                            <div class="col-md-12 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-location-dot me-1"></i>
-                                    Alamat
-                                </label>
-
-                                <textarea
-                                    name="alamat"
-                                    class="form-control @error('alamat') is-invalid @enderror"
-                                    rows="3"
-                                    required
-                                >{{ old('alamat', $profil->alamat) }}</textarea>
-
-                                @error('alamat')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- KONTAK --}}
-                            <div class="col-md-12 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-phone me-1"></i>
-                                    Kontak
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="kontak"
-                                    class="form-control @error('kontak') is-invalid @enderror"
-                                    value="{{ old('kontak', $profil->kontak) }}"
-                                    required
-                                >
-
-                                @error('kontak')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- VISI MISI --}}
-                            <div class="col-md-12 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-eye me-1"></i>
-                                    Visi & Misi
-                                </label>
-
-                                <textarea
-                                    name="visi_misi"
-                                    class="form-control @error('visi_misi') is-invalid @enderror"
-                                    rows="5"
-                                    required
-                                >{{ old('visi_misi', $profil->visi_misi) }}</textarea>
-
-                                @error('visi_misi')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- DESKRIPSI --}}
-                            <div class="col-md-12 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-align-left me-1"></i>
-                                    Deskripsi
-                                </label>
-
-                                <textarea
-                                    name="deskripsi"
-                                    class="form-control @error('deskripsi') is-invalid @enderror"
-                                    rows="5"
-                                    required
-                                >{{ old('deskripsi', $profil->deskripsi) }}</textarea>
-
-                                @error('deskripsi')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                            </div>
-
-
-                            {{-- FOTO SEKOLAH --}}
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-image me-1"></i>
-                                    Foto Sekolah
-                                </label>
-
+                            <div style="position:relative;display:inline-block;margin-bottom:18px;">
                                 @if($profil->foto)
-
-                                    <div class="mb-2">
-
-                                        <img
-                                            src="{{ asset('storage/' . $profil->foto) }}"
-                                            width="180"
-                                            height="120"
-                                            style="object-fit:cover;"
-                                            class="rounded border"
-                                            alt="Foto Sekolah"
-                                        >
-
+                                    <img src="{{ asset('storage/' . $profil->foto) }}" alt="Foto Sekolah" style="width:100%;height:100%;object-fit:cover;border-radius:15px;box-shadow:0 8px 20px rgba(36,77,115,.12);">
+                                @else
+                                    <div style="width:330px;max-width:100%;height:220px;background:#EAF3FA;border-radius:15px;display:flex;align-items:center;justify-content:center;">
+                                        <i class="fa-solid fa-school" style="font-size:55px;color:#6c8ba8;"></i>
                                     </div>
-
                                 @endif
-
-                                <input
-                                    type="file"
-                                    name="foto"
-                                    class="form-control @error('foto') is-invalid @enderror"
-                                    accept=".jpg,.jpeg,.png,.webp"
-                                >
-
-                                @error('foto')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                                <small class="text-muted">
-                                    Kosongkan jika tidak ingin mengganti foto.
-                                </small>
-
-                            </div>
-
-
-                            {{-- LOGO SEKOLAH --}}
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-                                    <i class="fa-solid fa-image me-1"></i>
-                                    Logo Sekolah
-                                </label>
 
                                 @if($profil->logo)
-
-                                    <div class="mb-2">
-
-                                        <img
-                                            src="{{ asset('storage/' . $profil->logo) }}"
-                                            width="100"
-                                            height="100"
-                                            style="object-fit:contain;"
-                                            class="rounded border"
-                                            alt="Logo Sekolah"
-                                        >
-
+                                    <div style="position:absolute;left:15px;bottom:-18px;width:72px;height:72px;background:#fff;border-radius:50%;padding:6px;box-shadow:0 5px 15px rgba(0,0,0,.15);">
+                                        <img src="{{ asset('storage/' . $profil->logo) }}" alt="Logo Sekolah" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
                                     </div>
-
                                 @endif
-
-                                <input
-                                    type="file"
-                                    name="logo"
-                                    class="form-control @error('logo') is-invalid @enderror"
-                                    accept=".jpg,.jpeg,.png,.webp"
-                                >
-
-                                @error('logo')
-
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-
-                                @enderror
-
-                                <small class="text-muted">
-                                    Kosongkan jika tidak ingin mengganti logo.
-                                </small>
-
                             </div>
 
+                           <div style="padding-top:5px;">
+                                <h4 class="fw-bold mb-1" style="color:#244D73;">{{ $profil->nama_sekolah }}</h4>
+                            </div>
                         </div>
+                    </div>
 
+                    {{-- INFORMASI SEKOLAH --}}
+                    <div class="col-lg-8">
+                        <div class="h-100">
 
-                        {{-- BUTTON MODAL --}}
-                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <div class="mb-3">
+                                <small class="text-uppercase fw-bold" style="color:#7A8A9A;letter-spacing:1px;">
+                                    Informasi Utama
+                                </small>
+                            </div>
 
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                            >
+                            <div class="row g-3">
 
-                                <i class="fa-solid fa-xmark me-1"></i>
-                                Batal
+                                <div class="col-12">
+                                    <div style="background:#F8FAFC;border:1px solid #edf1f5;border-radius:14px;padding:15px 17px;">
+                                        <div class="d-flex align-items-center">
+                                            <div style="width:42px;height:42px;min-width:42px;background:#EAF3FA;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                                                <i class="fa-solid fa-school" style="color:#244D73;font-size:17px;"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <small class="text-muted d-block">Nama Sekolah</small>
+                                                <strong style="color:#244D73;">{{ $profil->nama_sekolah }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            </button>
+                                <div class="col-md-6">
+                                    <div style="background:#F8FAFC;border:1px solid #edf1f5;border-radius:14px;padding:15px 17px;height:100%;">
+                                        <div class="d-flex align-items-center">
+                                            <div style="width:42px;height:42px;min-width:42px;background:#EAF3FA;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                                                <i class="fa-solid fa-user-tie" style="color:#244D73;font-size:17px;"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <small class="text-muted d-block">Kepala Sekolah</small>
+                                                <strong style="color:#244D73;">{{ $profil->kepala_sekolah }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <button
-                                type="submit"
-                                class="btn btn-primary"
-                            >
+                                <div class="col-md-3">
+                                    <div style="background:#F8FAFC;border:1px solid #edf1f5;border-radius:14px;padding:15px;height:100%;">
+                                        <small class="text-muted d-block mb-1"><i class="fa-solid fa-id-card me-1" style="color:#244D73;"></i>NPSN</small>
+                                        <strong style="color:#244D73;">{{ $profil->npsn }}</strong>
+                                    </div>
+                                </div>
 
-                                <i class="fa-solid fa-floppy-disk me-1"></i>
-                                Simpan Perubahan
+                                <div class="col-md-3">
+                                    <div style="background:#F8FAFC;border:1px solid #edf1f5;border-radius:14px;padding:15px;height:100%;">
+                                        <small class="text-muted d-block mb-1"><i class="fa-solid fa-calendar-days me-1" style="color:#244D73;"></i>Berdiri</small>
+                                        <strong style="color:#244D73;">{{ $profil->tahun_berdiri }}</strong>
+                                    </div>
+                                </div>
 
-                            </button>
+                                <div class="col-md-6">
+                                    <div style="background:#F8FAFC;border:1px solid #edf1f5;border-radius:14px;padding:15px 17px;height:100%;">
+                                        <div class="d-flex">
+                                            <div style="width:42px;height:42px;min-width:42px;background:#EAF3FA;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                                                <i class="fa-solid fa-phone" style="color:#244D73;font-size:17px;"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <small class="text-muted d-block">Kontak</small>
+                                                <strong style="color:#244D73;">{{ $profil->kontak }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="col-12">
+                                    <div style="background:#F8FAFC;border:1px solid #edf1f5;border-radius:14px;padding:15px 17px;">
+                                        <div class="d-flex">
+                                            <div style="width:42px;height:42px;min-width:42px;background:#EAF3FA;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                                                <i class="fa-solid fa-location-dot" style="color:#244D73;font-size:17px;"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <small class="text-muted d-block">Alamat</small>
+                                                <span style="color:#334155;line-height:1.6;">{{ $profil->alamat }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-
-                    </form>
+                    </div>
 
                 </div>
-
             </div>
+        </div>
+    </div>
 
+    {{-- VISI & MISI + DESKRIPSI --}}
+    <div class="row g-4 mt-0">
+
+        {{-- VISI MISI --}}
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100" style="border-radius:20px;">
+                <div class="card-body p-4">
+
+                    <div class="d-flex align-items-center mb-3">
+                        <div style="width:46px;height:46px;background:#EAF3FA;border-radius:13px;display:flex;align-items:center;justify-content:center;">
+                            <i class="fa-solid fa-eye" style="color:#244D73;font-size:19px;"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="fw-bold mb-0" style="color:#244D73;">Visi & Misi</h5>
+                            <small class="text-muted">Visi dan misi sekolah</small>
+                        </div>
+                    </div>
+
+                    <div style="background:#F8FAFC;border-radius:14px;padding:18px;border-left:4px solid #244D73;">
+                        <p class="text-muted mb-0" style="line-height:1.8;white-space:pre-line;">{{ $profil->visi_misi }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {{-- DESKRIPSI --}}
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100" style="border-radius:20px;">
+                <div class="card-body p-4">
+
+                    <div class="d-flex align-items-center mb-3">
+                        <div style="width:46px;height:46px;background:#EAF3FA;border-radius:13px;display:flex;align-items:center;justify-content:center;">
+                            <i class="fa-solid fa-book-open" style="color:#244D73;font-size:19px;"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="fw-bold mb-0" style="color:#244D73;">Deskripsi</h5>
+                            <small class="text-muted">Tentang SMK YPC Tasikmalaya</small>
+                        </div>
+                    </div>
+
+                    <div style="background:#F8FAFC;border-radius:14px;padding:18px;border-left:4px solid #244D73;">
+                        <p class="text-muted mb-0" style="line-height:1.8;white-space:pre-line;">{{ $profil->deskripsi }}</p>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>
 
+    {{-- TOMBOL EDIT --}}
+    <div class="text-end mt-4 mb-4">
+        <a href="{{ route('admin.profil.edit', $profil->id_profil) }}" class="btn btn-warning px-4">
+            <i class="fa-solid fa-pen me-1"></i>Edit Profil
+        </a>
+    </div>
 
     @else
 
-        {{-- EMPTY STATE --}}
-        <div class="card border-0 shadow-sm">
-
-            <div class="card-body text-center py-5">
-
-                <i class="fa-solid fa-school fs-1 text-secondary mb-3"></i>
-
-                <h4 class="fw-bold" style="color:#244D73;">
-                    Belum Ada Profil Sekolah
-                </h4>
-
-                <p class="text-muted">
-                    Silakan tambahkan profil sekolah terlebih dahulu.
-                </p>
-
-                <a href="{{ route('admin.profil.create') }}"
-                   class="btn btn-primary">
-
-                    <i class="fa-solid fa-plus me-1"></i>
-                    Tambah Profil
-
-                </a>
-
-            </div>
-
+    <div class="card border-0 shadow-sm" style="border-radius:20px;">
+        <div class="card-body text-center py-5">
+            <i class="fa-solid fa-school fs-1 mb-3" style="color:#244D73;"></i>
+            <h5 class="fw-bold" style="color:#244D73;">Belum Ada Profil Sekolah</h5>
+            <p class="text-muted">Silakan tambahkan data profil sekolah terlebih dahulu.</p>
+            <a href="{{ route('admin.profil.create') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus me-1"></i>Tambah Profil
+            </a>
         </div>
+    </div>
 
     @endif
-
 </div>
-
 @endsection

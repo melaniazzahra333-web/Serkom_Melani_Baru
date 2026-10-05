@@ -103,11 +103,25 @@ class EkstrakurikulerController extends Controller
 
     }
 
-    public function landing()
+public function landing()
 {
     $ekskuls = Ekstrakurikuler::latest()->get();
 
-    return view('landing.ekstrakurikuler', [
+    return view('landing.ekstrakurikuler.index', [
+        'ekskuls' => $ekskuls
+    ]);
+}
+
+public function detail($id)
+{
+    $ekstrakurikuler = Ekstrakurikuler::findOrFail($id);
+
+    $ekskuls = Ekstrakurikuler::where('id_eskul', '!=', $id)
+        ->latest()
+        ->get();
+
+    return view('landing.ekstrakurikuler.detail', [
+        'ekstrakurikuler' => $ekstrakurikuler,
         'ekskuls' => $ekskuls
     ]);
 }

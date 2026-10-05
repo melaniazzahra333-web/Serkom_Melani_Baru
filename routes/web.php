@@ -129,6 +129,7 @@ Route::middleware('auth.admin')->group(function () {
 // halaman Staf & Guru
 Route::get('/staf-guru', [GuruController::class, 'stafGuru'])->name('staf.guru');
 Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'landing'])->name('ekstrakurikuler');
+Route::get('/ekstrakurikuler/{id}', [EkstrakurikulerController::class, 'detail'])->name('ekstrakurikuler.detail');
 Route::get('/prestasi', [PrestasiController::class, 'landing'])->name('prestasi');
 Route::get('/pengumuman', [PengumumanController::class, 'landing'])->name('pengumuman');
 Route::get('/berita', [BeritaController::class, 'landing'])->name('berita');

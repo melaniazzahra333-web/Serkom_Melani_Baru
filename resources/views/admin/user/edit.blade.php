@@ -3,88 +3,60 @@
 @section('content')
 
 <div class="container-fluid">
-
-    <div class="mb-4">
-        <h2>Edit User</h2>
-        <p class="text-muted">Perbarui data pengguna</p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1" style="color:#244D73;"><i class="fa-solid fa-user-pen me-2"></i>Edit User</h2>
+            <p class="text-muted mb-0">Perbarui data pengguna</p>
+        </div>
+        <!-- <a href="{{ route('admin.user') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left me-1"></i>Kembali</a> -->
     </div>
 
     <div class="card border-0 shadow-sm">
-        <div class="card-body">
+        <div class="card-body p-4">
 
-            <form action="{{ route('admin.user.update', $user->id_user) }}"
-                  method="POST">
+            <div class="border-bottom pb-3 mb-4">
+                <h5 class="fw-bold mb-1" style="color:#244D73;"><i class="fa-solid fa-user-gear me-2"></i>Form Edit User</h5>
+                <small class="text-muted">Silakan perbarui informasi pengguna di bawah ini.</small>
+            </div>
 
+            <form action="{{ route('admin.user.update', $user->id_user) }}" method="POST">
                 @csrf
                 @method('PUT')
 
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-user me-1" style="color:#244D73;"></i>Nama</label>
+                        <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>
+                    </div>
 
-                    <input type="text"
-                           name="name"
-                           class="form-control"
-                           value="{{ old('name', $user->name) }}"
-                           required>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-at me-1" style="color:#244D73;"></i>Username</label>
+                        <input type="text" name="username" class="form-control" value="{{ old('username', $user->username) }}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-lock me-1" style="color:#244D73;"></i>Password Baru</label>
+                        <input type="password" name="password" class="form-control">
+                        <small class="text-muted"><i class="fa-solid fa-circle-info me-1"></i>Kosongkan jika tidak ingin mengganti password.</small>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold"><i class="fa-solid fa-user-shield me-1" style="color:#244D73;"></i>Role</label>
+                        <select name="role" class="form-select" required>
+                            <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="Operator" {{ $user->role == 'Operator' ? 'selected' : '' }}>Operator</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-
-                    <input type="text"
-                           name="username"
-                           class="form-control"
-                           value="{{ old('username', $user->username) }}"
-                           required>
+                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                    <a href="{{ route('admin.user') }}" class="btn btn-secondary"><i class="fa-solid fa-xmark me-1"></i>Batal</a>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save me-1"></i>Simpan Perubahan</button>
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label">
-                        Password Baru
-                    </label>
-
-                    <input type="password"
-                           name="password"
-                           class="form-control">
-
-                    <small class="text-muted">
-                        Kosongkan jika tidak ingin mengganti password.
-                    </small>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Role</label>
-
-                    <select name="role" class="form-select" required>
-
-                        <option value="Admin"
-                            {{ $user->role == 'Admin' ? 'selected' : '' }}>
-                            Admin
-                        </option>
-
-                        <option value="Operator"
-                            {{ $user->role == 'Operator' ? 'selected' : '' }}>
-                            Operator
-                        </option>
-
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-save me-1"></i>
-                    Update
-                </button>
-
-                <a href="{{ route('admin.user') }}"
-                   class="btn btn-secondary">
-                    Kembali
-                </a>
-
             </form>
 
         </div>
     </div>
-
 </div>
 
 @endsection
