@@ -49,12 +49,12 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#ekstrakurikuler">
+                            <a class="dropdown-item" href="{{ route('ekstrakurikuler') }}">
                                 Ekstrakurikuler
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#prestasi">
+                            <a class="dropdown-item" href="{{ route('prestasi') }}">
                                 Prestasi
                             </a>
                         </li>
@@ -68,12 +68,12 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#pengumuman">
+                            <a class="dropdown-item" href="{{ route('pengumuman') }}">
                                 Pengumuman
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#berita">
+                            <a class="dropdown-item" href="{{ route('berita') }}">
                                 Berita
                             </a>
                         </li>
@@ -81,7 +81,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#galeri">
+                    <a class="nav-link" href="{{ route('galeri') }}">
                         <i class="fa-solid fa-images me-1"></i>Foto & Video
                     </a>
                 </li>
@@ -96,8 +96,6 @@
         </div>
     </div>
 </nav>
-
-
 
 <!-- BANNER -->
 <div id="banner" class="carousel slide" data-bs-ride="carousel">
@@ -137,7 +135,7 @@
 
 
 <!-- SAMBUTAN KEPALA SEKOLAH -->
-<section id="sambutan" style="background:#fff;">
+<div id="sambutan" style="background:#fff;">
     <div class="container py-5">
 
         <div class="row align-items-center g-4">
@@ -182,7 +180,7 @@
 
         </div>
     </div>
-</section>
+</div>
 
 
 
@@ -226,7 +224,7 @@
 
                         @endforeach
 
-                        <a href="#pengumuman" style="color:#0866b3;text-decoration:none;">
+                        <a href="{{ route('pengumuman') }}" style="color:#0866b3;text-decoration:none;">
                             Lihat Semua Pengumuman →
                         </a>
 
@@ -236,49 +234,48 @@
 
 
 
-            <!-- PRESTASI -->
-            <div class="col-lg-4" id="prestasi" data-aos="fade-up" data-aos-delay="150">
+           <!-- PRESTASI -->
+<div class="col-lg-4" id="prestasi" data-aos="fade-up" data-aos-delay="150">
+    <div class="card h-100 info-card">
+        <div class="card-body">
+            <h3 style="color:#0866b3;font-size:22px;">
+                <i class="fa-solid fa-trophy"></i>
+                Prestasi
+            </h3>
 
-                <div class="card h-100 info-card">
+            <hr>
 
-                    <div class="card-body">
+            @if($prestasis)
 
-                        <h3 style="color:#0866b3;font-size:22px;">
-                            <i class="fa-solid fa-trophy"></i>
-                            Prestasi
-                        </h3>
-
-                        <hr>
-
-                        @foreach($prestasis as $item)
-
-                            <div style="margin-bottom:20px;">
-
-                                @if($item->foto)
-                                    <div class="info-img">
-                                        <img src="{{ asset('storage/'.$item->foto) }}" alt="Foto Prestasi">
-                                    </div>
-                                @endif
-
-                                <h5 style="font-size:16px;">
-                                    {{ $item->deskripsi }}
-                                </h5>
-
-                                <small style="color:#888;">
-                                    Tahun Ajaran {{ $item->tahun_ajaran }}
-                                </small>
-
-                            </div>
-
-                        @endforeach
-
-                        <a href="#prestasi" style="color:#0866b3;text-decoration:none;">
-                            Lihat Semua Prestasi →
-                        </a>
-
+                @if($prestasis->foto)
+                    <div class="info-img">
+                        <img src="{{ asset('storage/'.$prestasis->foto) }}" alt="Foto Prestasi">
                     </div>
-                </div>
-            </div>
+                @endif
+
+                <h5 style="font-size:16px;">
+                    {{ $prestasis->deskripsi }}
+                </h5>
+
+                <small style="color:#888;">
+                    Tahun Ajaran {{ $prestasis->tahun_ajaran }}
+                </small>
+
+            @else
+
+                <p style="color:#888;">
+                    Belum ada prestasi.
+                </p>
+
+            @endif
+
+            <a href="{{ route('prestasi') }}" style="color:#0866b3;text-decoration:none;">
+                Lihat Semua Prestasi →
+            </a>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -324,7 +321,7 @@
 
                         @endif
 
-                        <a href="#berita" style="color:#0866b3;text-decoration:none;">
+                        <a href="{{ route('berita') }}" style="color:#0866b3;text-decoration:none;">
                             Lihat Semua Berita →
                         </a>
 
@@ -432,8 +429,9 @@
 
 
 
+
 <!-- Guru & Staf -->
-<section id="guru" class="py-5">
+<div id="guru" class="py-5">
     <div class="container">
 
         <!-- Judul + Tombol -->
@@ -497,12 +495,12 @@
         </div>
 
     </div>
-</section>
+</div>
 
 
 
 <!-- EKSTRAKURIKULER -->
-<section id="ekstrakurikuler" style="padding:35px 0 60px;background:#fff;">
+<div id="ekstrakurikuler" style="padding:35px 0 60px;background:#fff;">
 
     <div class="container">
 
@@ -520,7 +518,7 @@
                 <div style="width:295px;height:4px;background:#e9a000;margin-top:14px;"></div>
             </div>
 
-            <a href="#ekstrakurikuler"
+            <a href="{{ route('ekstrakurikuler') }}"
                style="background:#0863aa;color:#fff;padding:10px 15px;border-radius:6px;text-decoration:none;font-size:14px;">
                 › Lihat Semua
             </a>
@@ -582,12 +580,12 @@
 
     </div>
 
-</section>
+</div>
 
 
 
 <!-- GALERI -->
-<section id="galeri" style="padding:60px 0;background:#f3f8fc;">
+<div id="galeri" style="padding:60px 0;background:#f3f8fc;">
 
     <div class="container">
 
@@ -605,7 +603,7 @@
                 <div style="width:295px;height:4px;background:#e9a000;margin-top:14px;"></div>
             </div>
 
-            <a href="#galeri"
+            <a href="{{ route('galeri') }}"
                style="background:#0863aa;color:#fff;padding:10px 15px;border-radius:6px;text-decoration:none;font-size:14px;">
                 › Lihat Semua
             </a>
@@ -622,52 +620,45 @@
 
 
         <div class="row g-4">
+    @foreach($galeris as $galeri)
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+            <a href="{{ route('galeri.detail', ['kategori' => $galeri->kategori, 'judul' => $galeri->judul]) }}" style="text-decoration:none;color:inherit;">
+                <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);height:100%;position:relative;transition:.3s;">
 
-            @foreach($galeris as $galeri)
+                    <div style="position:relative;">
+                        <img src="{{ asset('storage/'.$galeri->file) }}"
+                             alt="{{ $galeri->judul }}"
+                             style="width:100%;height:230px;object-fit:cover;">
 
-                <div class="col-md-4"
-                     data-aos="zoom-in"
-                     data-aos-delay="{{ $loop->iteration * 100 }}">
-
-                    <div class="galeri-card">
-
-                        <div style="position:relative;overflow:hidden;">
-
-                            <img src="{{ asset('storage/'.$galeri->file) }}"
-                                 alt="{{ $galeri->judul }}">
-
-                            <span class="galeri-jumlah">
-                                <i class="fa-solid fa-camera"></i>
-                            </span>
-
+                        <div style="position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.65);color:#fff;padding:5px 9px;border-radius:6px;font-size:13px;">
+                            @if($galeri->kategori == 'Foto')
+                                <i class="fa-solid fa-camera"></i> {{ $galeri->jumlah }}
+                            @else
+                                <i class="fa-solid fa-video"></i> {{ $galeri->jumlah }}
+                            @endif
                         </div>
+                    </div>
 
-                        <div style="padding:14px 15px;">
-
-                            <h5>
-                                {{ $galeri->judul }}
-                            </h5>
-
-                        </div>
-
+                    <div style="padding:16px;">
+                        <h5 style="font-size:17px;font-weight:600;color:#333;margin:0;">
+                            {{ $galeri->judul }}
+                        </h5>
                     </div>
 
                 </div>
-
-            @endforeach
-
+            </a>
         </div>
+    @endforeach
+</div>
 
     </div>
 
-</section>
+</div>
 
     @include('landing.footer')
 
 <!-- BOOTSTRAP -->
 <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-<!-- AOS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>

@@ -119,4 +119,15 @@ class PengumumanController extends Controller
 
         return redirect()->route('admin.pengumuman')->with('success', 'Pengumuman berhasil dihapus.');
     }
+
+    public function landing()
+{
+    $pengumuman = Pengumuman::where('status', 'Publish')
+        ->latest('tanggal')
+        ->get();
+
+    return view('landing.pengumuman', [
+        'pengumuman' => $pengumuman
+    ]);
+}
 }

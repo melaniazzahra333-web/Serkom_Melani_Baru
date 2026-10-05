@@ -133,4 +133,15 @@ class BeritaController extends Controller
 
         return redirect()->route('admin.berita')->with('success', 'Berita berhasil dihapus.');
     }
+
+    public function landing()
+{
+    $berita = Berita::where('status', 'Publish')
+        ->latest()
+        ->get();
+
+    return view('landing.berita', [
+        'berita' => $berita
+    ]);
+}
 }

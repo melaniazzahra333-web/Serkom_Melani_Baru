@@ -12,11 +12,6 @@ class SiswaController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // $siswas = Siswa::all();
-
-        // return view('admin.siswa.index', compact('siswas'));
-
         $search = $request->search;
 
         $siswas = Siswa::query()
@@ -106,7 +101,7 @@ class SiswaController extends Controller
             'tahun_masuk' => $request->tahun_masuk,
         ]);
 
-        return redirect()->route('admin.siswa');
+        return redirect()->route('admin.siswa')->with('success', 'Data siswa berhasil diperbarui.');
     }
 
     /**

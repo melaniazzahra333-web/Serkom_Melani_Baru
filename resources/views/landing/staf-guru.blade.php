@@ -6,12 +6,11 @@
     <title>Staf & Guru - SMK YPC Tasikmalaya</title>
 
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}">
 </head>
 
 <body>
-
     @include('landing.navbar')
 
     <section style="padding:130px 0 60px;background:#f5f8fb;">

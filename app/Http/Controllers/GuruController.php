@@ -121,7 +121,7 @@ class GuruController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.guru');
+        return redirect()->route('admin.guru')->with('success', 'Data guru berhasil diperbarui.');
     }
 
     /**

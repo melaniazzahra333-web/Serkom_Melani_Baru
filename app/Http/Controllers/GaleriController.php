@@ -125,4 +125,33 @@ class GaleriController extends Controller
         return redirect()->route('admin.galeri')->with('success', 'Data galeri berhasil dihapus.');
 
     }
+public function landing()
+{
+    $galeris = Galeri::latest()->get();
+
+    return view('landing.galeri', [
+        'galeris' => $galeris
+    ]);
+}
+
+public function show($id)
+{
+   $galeri = Galeri::findOrFail($id);
+
+    $galeris = Galeri::where('judul', $galeri->judul)
+        ->latest()
+        ->get();
+
+    return view('landing.galeri-detail', compact('galeris'));
+}
+
+public function detail($kategori, $judul)
+{
+    $galeris = Galeri::where('kategori', $kategori)
+        ->where('judul', $judul)
+        ->latest()
+        ->get();
+
+    return view('landing.galeri-detail', compact('galeris'));
+}
 }

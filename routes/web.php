@@ -75,7 +75,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('profil/{id}', [ProfilController::class, 'update'])->name('admin.profil.update');
 
     // berita
-    Route::get('berita', [BeritaController::class, 'index'])->name('admin.berita');
+    Route::get('admin/berita', [BeritaController::class, 'index'])->name('admin.berita');
     Route::get('berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
     Route::post('berita', [BeritaController::class, 'store'])->name('admin.berita.store');
     Route::get('berita/{id}/edit', [BeritaController::class, 'edit'])->name('admin.berita.edit');
@@ -83,7 +83,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::delete('berita/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
 
     // galeri
-    Route::get('galeri', [GaleriController::class, 'index'])->name('admin.galeri');
+    Route::get('admin/galeri', [GaleriController::class, 'index'])->name('admin.galeri');
     Route::get('galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
     Route::post('galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
     Route::get('galeri/{id}/edit', [GaleriController::class, 'edit'])->name('admin.galeri.edit');
@@ -91,7 +91,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::delete('galeri/{id}', [GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
 
     // eskul
-    Route::get('ekstrakurikuler', [EkstrakurikulerController::class, 'index'])->name('admin.ektrakurikuler');
+    Route::get('admin/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])->name('admin.ektrakurikuler');
     Route::get('ekstrakurikuler/create', [EkstrakurikulerController::class, 'create'])->name('admin.ektrakurikuler.create');
     Route::post('ekstrakurikuler', [EkstrakurikulerController::class, 'store'])->name('admin.ektrakurikuler.store');
     Route::get('ekstrakurikuler/{id}/edit', [EkstrakurikulerController::class, 'edit'])->name('admin.ektrakurikuler.edit');
@@ -99,7 +99,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::delete('ekstrakurikuler/{id}', [EkstrakurikulerController::class, 'destroy'])->name('admin.ektrakurikuler.destroy');
 
     // pengumuman
-    Route::get('pengumuman', [PengumumanController::class, 'index'])->name('admin.pengumuman');
+    Route::get('admin/pengumuman', [PengumumanController::class, 'index'])->name('admin.pengumuman');
     Route::get('pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
     Route::post('pengumuman', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
     Route::get('pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
@@ -107,7 +107,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::delete('pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
 
     // PRESTASI
-    Route::get('prestasi', [PrestasiController::class, 'index'])->name('admin.prestasi');
+    Route::get('admin/prestasi', [PrestasiController::class, 'index'])->name('admin.prestasi');
     Route::get('prestasi/create', [PrestasiController::class, 'create'])->name('admin.prestasi.create');
     Route::post('prestasi', [PrestasiController::class, 'store'])->name('admin.prestasi.store');
     Route::get('prestasi/{id}/edit', [PrestasiController::class, 'edit'])->name('admin.prestasi.edit');
@@ -120,12 +120,20 @@ Route::middleware('auth.admin')->group(function () {
 // Route::get('/', function () {
 //     return redirect()->route('login');
 // });
+
 // Route::get('/', function () {
 //     return view('landing.index');
 // });
 
+
 // halaman Staf & Guru
 Route::get('/staf-guru', [GuruController::class, 'stafGuru'])->name('staf.guru');
-
+Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'landing'])->name('ekstrakurikuler');
+Route::get('/prestasi', [PrestasiController::class, 'landing'])->name('prestasi');
+Route::get('/pengumuman', [PengumumanController::class, 'landing'])->name('pengumuman');
+Route::get('/berita', [BeritaController::class, 'landing'])->name('berita');
+Route::get('/galeri', [GaleriController::class, 'landing'])->name('galeri');
+Route::get('/galeri/{kategori}/{judul}', [GaleriController::class, 'detail'])->name('galeri.detail');
+Route::get('/galeri/{id}', [GaleriController::class, 'show'])->name('galeri.show');
 
 Route::get('/', [LandingController::class, 'index'])->name('home');

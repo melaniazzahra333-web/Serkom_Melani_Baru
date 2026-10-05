@@ -102,4 +102,13 @@ class EkstrakurikulerController extends Controller
         return redirect()->route('admin.ektrakurikuler')->with('success', 'Ekstrakurikuler berhasil dihapus.');
 
     }
+
+    public function landing()
+{
+    $ekskuls = Ekstrakurikuler::latest()->get();
+
+    return view('landing.ekstrakurikuler', [
+        'ekskuls' => $ekskuls
+    ]);
+}
 }

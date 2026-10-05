@@ -33,12 +33,12 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#ekstrakurikuler">
+                            <a class="dropdown-item" href="{{ route('ekstrakurikuler') }}">
                                 Ekstrakurikuler
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#prestasi">
+                            <a class="dropdown-item" href="{{ route('prestasi') }}">
                                 Prestasi
                             </a>
                         </li>
@@ -52,12 +52,12 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#pengumuman">
+                            <a class="dropdown-item" href="{{ route('pengumuman') }}">
                                 Pengumuman
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#berita">
+                            <a class="dropdown-item" href="{{ route('berita') }}">
                                 Berita
                             </a>
                         </li>
@@ -65,7 +65,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#galeri">
+                    <a class="nav-link" href="{{ route('galeri') }}">
                         <i class="fa-solid fa-images me-1"></i>Foto & Video
                     </a>
                 </li>

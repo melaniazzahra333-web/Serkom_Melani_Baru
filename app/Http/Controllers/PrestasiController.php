@@ -92,4 +92,14 @@ class PrestasiController extends Controller
 
         return redirect()->route('admin.prestasi')->with('success', 'Data prestasi berhasil dihapus.');
     }
+
+public function landing()
+{
+    $prestasis = Prestasi::latest()->get();
+
+    return view('landing.prestasi', [
+        'prestasis' => $prestasis
+    ]);
+}
+
 }
