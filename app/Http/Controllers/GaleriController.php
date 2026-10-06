@@ -39,37 +39,44 @@ class GaleriController extends Controller
     }
 
     public function store(Request $request)
-    {
+{
+    $request->validate([
+        'judul' => 'required|max:50',
+        'keterangan' => 'required',
+        'kategori' => 'required|in:Foto,Video',
+        'tanggal' => 'required|date',
+    ]);
+
+    $file = null;
+
+    if ($request->kategori == 'Foto') {
+
         $request->validate([
-            'judul' => 'required|max:50',
-            'keterangan' => 'required',
-            'kategori' => 'required|in:Foto,Video',
-            'tanggal' => 'required|date',
+            'file' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $file = null;
+        $file = $request->file('file')->store('galeri', 'public');
 
-        if ($request->kategori == 'Foto') {
+    } else {
 
-            $request->validate(['file' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',]);
-            $file = $request->file('file')->store('galeri', 'public');
-
-        } else {
-            $request->validate(['file' => 'required|url',]);
-            $file = $request->file;
-        }
-
-        Galeri::create([
-            'judul' => $request->judul,
-            'keterangan' => $request->keterangan,
-            'file' => $file,
-            'kategori' => $request->kategori,
-            'tanggal' => $request->tanggal,
+        $request->validate([
+            'file' => 'required|url',
         ]);
 
-        return redirect()->route('admin.galeri')->with('success', 'Data galeri berhasil ditambahkan.');
+        $file = $request->file;
     }
 
+    Galeri::create([
+        'judul' => $request->judul,
+        'keterangan' => $request->keterangan,
+        'file' => $file,
+        'kategori' => $request->kategori,
+        'tanggal' => $request->tanggal,
+    ]);
+
+    return redirect()->route('admin.galeri')
+        ->with('success', 'Data galeri berhasil ditambahkan.');
+}
     public function edit($id)
     {
         $galeri = Galeri::findOrFail($id);
@@ -129,7 +136,7 @@ public function landing()
 {
     $galeris = Galeri::latest()->get();
 
-    return view('landing.galeri', [
+    return view('landing.galeri.index', [
         'galeris' => $galeris
     ]);
 }
@@ -152,6 +159,6 @@ public function detail($kategori, $judul)
         ->latest()
         ->get();
 
-    return view('landing.galeri-detail', compact('galeris'));
+    return view('landing.galeri.detail', compact('galeris'));
 }
 }

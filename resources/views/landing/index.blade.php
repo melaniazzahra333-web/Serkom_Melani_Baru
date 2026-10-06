@@ -260,6 +260,7 @@
                 <small style="color:#888;">
                     Tahun Ajaran {{ $prestasis->tahun_ajaran }}
                 </small>
+                <br>
 
             @else
 
@@ -655,7 +656,8 @@
 
 </div>
 
-    @include('landing.footer')
+        @include('landing.footer')
+
 
 <!-- BOOTSTRAP -->
 <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

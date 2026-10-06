@@ -4,107 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ekstrakurikuler - SMK YPC Tasikmalaya</title>
-
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}">
-
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
 
-    @include('landing.navbar')
+@include('landing.navbar')
 
-    <section style="padding:50px 0 60px;background:#fff;">
-        <div class="container">
+<section style="padding:50px 0 60px;background:#fff;">
+    <div class="container">
 
-            <!-- BREADCRUMB -->
-            <div style="padding-bottom:18px;border-bottom:1px solid #eee;margin-bottom:25px;">
-                <a href="{{ url('/') }}" style="text-decoration:none;color:#333;font-size:14px;">
-                    Beranda
-                </a>
-                <span style="color:#777;font-size:14px;"> » Ekstrakurikuler</span>
-            </div>
+        <div style="padding-bottom:18px;border-bottom:1px solid #eee;margin-bottom:25px;">
+            <a href="{{ url('/') }}" style="text-decoration:none;color:#333;font-size:14px;">Beranda</a>
+            <span style="color:#777;font-size:14px;"> » Ekstrakurikuler</span>
+        </div>
 
-            <!-- JUDUL -->
-            <h1 style="font-size:34px;font-weight:700;color:#333;margin-bottom:30px;" data-aos="fade-up">
-                Ekstrakurikuler
-            </h1>
+        <h1 style="font-size:34px;font-weight:700;color:#333;margin-bottom:30px;" data-aos="fade-up">
+            Ekstrakurikuler
+        </h1>
 
-            <!-- DATA EKSKUL -->
-            <div class="row g-3">
+        <div class="row g-3">
 
-                @forelse($ekskuls as $eskul)
+            @forelse($ekskuls as $nama => $items)
 
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800">
+                @php
+                    $eskul = $items->first();
+                @endphp
 
-                        <div style="display:flex;background:#fff;border:1px solid #eee;border-radius:14px;overflow:hidden;min-height:230px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800">
 
-                            <!-- GAMBAR -->
-                            <div style="width:50%;min-width:50%;">
-                                @if($eskul->gambar)
-                                    <img src="{{ asset('storage/'.$eskul->gambar) }}" alt="{{ $eskul->nama_eskul }}" style="width:100%;height:230px;object-fit:cover;">
-                                @else
-                                    <div style="width:100%;height:230px;background:#eee;display:flex;align-items:center;justify-content:center;">
-                                        <i class="fa-solid fa-image" style="font-size:50px;color:#aaa;"></i>
-                                    </div>
-                                @endif
-                            </div>
+                    <div style="display:flex;background:#fff;border:1px solid #eee;border-radius:14px;overflow:hidden;min-height:230px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
 
-                            <!-- INFORMASI -->
-                            <div style="width:50%;padding:25px 15px;display:flex;flex-direction:column;justify-content:center;">
+                        <div style="width:50%;min-width:50%;">
+                            @if($eskul->gambar)
+                                <img src="{{ asset('storage/'.$eskul->gambar) }}" alt="{{ $eskul->nama_eskul }}" style="width:100%;height:230px;object-fit:cover;">
+                            @else
+                                <div style="width:100%;height:230px;background:#eee;display:flex;align-items:center;justify-content:center;">
+                                    <i class="fa-solid fa-image" style="font-size:50px;color:#aaa;"></i>
+                                </div>
+                            @endif
+                        </div>
 
-                                <h5 style="font-size:20px;font-weight:600;color:#222;margin-bottom:12px;">
-                                    {{ $eskul->nama_eskul }}
-                                </h5>
+                        <div style="width:50%;padding:25px 15px;display:flex;flex-direction:column;justify-content:center;">
 
-                                <p style="font-size:14px;color:#777;margin-bottom:10px;">
-                                    <i class="fa-solid fa-users" style="width:18px;"></i>
-                                    Jumlah Anggota: 30
-                                </p>
+                            <h5 style="font-size:20px;font-weight:600;color:#222;margin-bottom:12px;">
+                                {{ $eskul->nama_eskul }}
+                            </h5>
 
-                                <p style="font-size:14px;color:#777;margin-bottom:10px;">
-                                    <i class="fa-solid fa-user" style="width:18px;"></i>
-                                    Pembina: {{ $eskul->pembina }}
-                                </p>
+                            <p style="font-size:14px;color:#777;margin-bottom:10px;">
+                                <i class="fa-solid fa-user" style="width:18px;"></i>
+                                Pembina: {{ $eskul->pembina }}
+                            </p>
 
-                                <a href="{{ route('ekstrakurikuler.detail', $eskul->id_eskul) }}" style="font-size:14px;color:#222;text-decoration:none;border-bottom:1px dotted #333;width:max-content;padding-bottom:2px;">
-                                    Selengkapnya »
-                                </a>
+                            <p style="font-size:13px;color:#999;margin-bottom:12px;">
+                                <i class="fa-solid fa-images" style="width:18px;"></i>
+                                {{ $items->count() }} Dokumentasi
+                            </p>
 
-                            </div>
+                            <a href="{{ route('ekstrakurikuler.detail', $eskul->id_eskul) }}" style="font-size:14px;color:#222;text-decoration:none;border-bottom:1px dotted #333;width:max-content;padding-bottom:2px;">
+                                Selengkapnya »
+                            </a>
 
                         </div>
 
                     </div>
 
-                @empty
+                </div>
 
-                    <div class="col-12 text-center py-5">
-                        <i class="fa-solid fa-people-group" style="font-size:50px;color:#aaa;"></i>
-                        <p style="color:#777;margin-top:15px;">Belum ada data ekstrakurikuler.</p>
-                    </div>
+            @empty
 
-                @endforelse
+                <div class="col-12 text-center py-5">
+                    <i class="fa-solid fa-people-group" style="font-size:50px;color:#aaa;"></i>
+                    <p style="color:#777;margin-top:15px;">Belum ada data ekstrakurikuler.</p>
+                </div>
 
-            </div>
+            @endforelse
 
         </div>
-    </section>
 
-    @include('landing.footer')
+    </div>
+</section>
 
-    <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+@include('landing.footer')
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true
-        });
-    </script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
 
 </body>
 </html>

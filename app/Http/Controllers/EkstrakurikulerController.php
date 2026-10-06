@@ -105,23 +105,35 @@ class EkstrakurikulerController extends Controller
 
 public function landing()
 {
-    $ekskuls = Ekstrakurikuler::latest()->get();
+    $ekskuls = Ekstrakurikuler::latest()->get()->groupBy('nama_eskul');
 
     return view('landing.ekstrakurikuler.index', [
         'ekskuls' => $ekskuls
     ]);
 }
-
 public function detail($id)
 {
     $ekstrakurikuler = Ekstrakurikuler::findOrFail($id);
 
-    $ekskuls = Ekstrakurikuler::where('id_eskul', '!=', $id)
+    $galeri = Ekstrakurikuler::where('nama_eskul', $ekstrakurikuler->nama_eskul)->get();
+
+    $deskripsi = $galeri->pluck('deskripsi')
+        ->filter()
+        ->unique()
+        ->values();
+
+    $ekskuls = Ekstrakurikuler::where('nama_eskul', '!=', $ekstrakurikuler->nama_eskul)
         ->latest()
-        ->get();
+        ->get()
+        ->groupBy('nama_eskul')
+        ->map(function ($items) {
+            return $items->first();
+        });
 
     return view('landing.ekstrakurikuler.detail', [
         'ekstrakurikuler' => $ekstrakurikuler,
+        'galeri' => $galeri,
+        'deskripsi' => $deskripsi,
         'ekskuls' => $ekskuls
     ]);
 }
