@@ -5,23 +5,30 @@
 <div class="container-fluid">
 
     <div class="mb-4">
+
         <h2>
             <i class="fa-solid fa-images me-2"></i>
             Tambah Galeri
         </h2>
+
         <p class="text-muted mb-0">
             Tambahkan foto atau video kegiatan sekolah
         </p>
+
     </div>
 
     <div class="card border-0 shadow-sm">
+
         <div class="card-body">
 
             <form action="{{ route('admin.galeri.store') }}" method="POST" enctype="multipart/form-data">
+
                 @csrf
 
                 {{-- Judul --}}
+
                 <div class="mb-3">
+
                     <label class="form-label">
                         <i class="fa-solid fa-heading me-1"></i>
                         Judul
@@ -37,44 +44,66 @@
                     @error('judul')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
+
                 </div>
 
 
                 {{-- Keterangan --}}
+
                 <div class="mb-3">
+
                     <label class="form-label">
                         <i class="fa-solid fa-align-left me-1"></i>
                         Keterangan
                     </label>
 
-                    <textarea name="keterangan" class="form-control" rows="4" required>{{ old('keterangan') }}</textarea>
+                    <textarea name="keterangan"
+                              class="form-control"
+                              rows="4"
+                              required>{{ old('keterangan') }}</textarea>
 
                     @error('keterangan')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
+
                 </div>
 
 
                 {{-- Kategori --}}
+
                 <div class="mb-3">
+
                     <label class="form-label">
                         <i class="fa-solid fa-layer-group me-1"></i>
                         Kategori
                     </label>
 
-                    <select name="kategori" id="kategori" class="form-select" required>
+                    <select name="kategori"
+                            id="kategori"
+                            class="form-select"
+                            required>
+
                         <option value="">-- Pilih Kategori --</option>
-                        <option value="Foto" {{ old('kategori') == 'Foto' ? 'selected' : '' }}>Foto</option>
-                        <option value="Video" {{ old('kategori') == 'Video' ? 'selected' : '' }}>Video</option>
+
+                        <option value="Foto" {{ old('kategori') == 'Foto' ? 'selected' : '' }}>
+                            Foto
+                        </option>
+
+                        <option value="Video" {{ old('kategori') == 'Video' ? 'selected' : '' }}>
+                            Video
+                        </option>
+
                     </select>
 
                     @error('kategori')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
+
                 </div>
 
 
                 {{-- File Foto --}}
+
                 <div class="mb-3" id="fotoInput">
 
                     <label class="form-label">
@@ -82,35 +111,40 @@
                         Upload Foto
                     </label>
 
-                    <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.png,.webp">
+                    <input type="file"
+                           name="file"
+                           class="form-control"
+                           accept=".jpg,.jpeg,.png,.webp">
 
                     <small class="text-muted">
                         Format: JPG, JPEG, PNG, WEBP. Maksimal 2 MB.
                     </small>
 
                     @error('file')
-                        <small class="text-danger d-block">{{ $message }}</small>
+                        <small class="text-danger d-block">
+                            {{ $message }}
+                        </small>
                     @enderror
 
                 </div>
 
 
-                {{-- Link Video --}}
+                {{-- VIDEO --}}
+
                 <div class="mb-3" id="videoInput">
 
                     <label class="form-label">
-                        <i class="fa-brands fa-youtube me-1"></i>
-                        Link Video YouTube
+                        <i class="fa-solid fa-video me-1"></i>
+                        Upload Video
                     </label>
 
-                    <input type="url"
+                    <input type="file"
                            name="file"
                            class="form-control"
-                           placeholder="https://www.youtube.com/watch?v=..."
-                           value="{{ old('file') }}">
+                           accept="video/mp4,video/webm,video/quicktime">
 
                     <small class="text-muted">
-                        Masukkan link video YouTube.
+                        Format video: MP4, WEBM, MOV. Maksimal 20 MB.
                     </small>
 
                     @error('file')
@@ -123,6 +157,7 @@
 
 
                 {{-- Tanggal --}}
+
                 <div class="mb-4">
 
                     <label class="form-label">
@@ -161,6 +196,7 @@
             </form>
 
         </div>
+
     </div>
 
 </div>

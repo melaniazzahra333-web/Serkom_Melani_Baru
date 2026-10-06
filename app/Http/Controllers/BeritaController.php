@@ -89,6 +89,19 @@ class BeritaController extends Controller
         return view('admin.berita.edit', compact('berita'));
     }
 
+    public function show($id)
+{
+      $berita = Berita::where('status', 'Publish')->findOrFail($id);
+
+    $beritaLainnya = Berita::where('status', 'Publish')
+        ->where('id_berita', '!=', $berita->id_berita)
+        ->latest()
+        ->take(3)
+        ->get();
+
+    return view('landing.berita.detail', compact('berita', 'beritaLainnya'));
+}
+
     /**
      * Update berita
      */
@@ -134,14 +147,12 @@ class BeritaController extends Controller
         return redirect()->route('admin.berita')->with('success', 'Berita berhasil dihapus.');
     }
 
-    public function landing()
+   public function landing()
 {
-    $berita = Berita::where('status', 'Publish')
+    $beritas = Berita::where('status', 'Publish')
         ->latest()
         ->get();
 
-    return view('landing.berita', [
-        'berita' => $berita
-    ]);
+    return view('landing.berita.index', compact('beritas'));
 }
 }

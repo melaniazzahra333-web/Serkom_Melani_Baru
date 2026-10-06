@@ -8,7 +8,7 @@
             <h2 class="fw-bold mb-1" style="color:#244D73;"><i class="fa-solid fa-chalkboard-user me-2"></i>Edit Data Guru</h2>
             <p class="text-muted mb-0">Ubah data guru dan tenaga pendidik</p>
         </div>
-        <!-- <a href="{{ route('admin.guru') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left me-1"></i>Kembali</a>    -->
+       
     </div>
 
     <div class="card border-0 shadow-sm">
@@ -62,7 +62,7 @@
                             </div>
                         @endif
 
-                        <input type="file" name="foto" class="form-control" accept=".jpg,.jpeg,.png">
+                        <input type="file" name="foto" class="form-control" accept=".jpg,.jpeg,.png,.webp">
                         <small class="text-muted">Pilih foto baru jika ingin mengganti foto guru.</small>
                     </div>
                 </div>

@@ -38,7 +38,9 @@
 
                 <div class="col-lg-3 col-md-6" data-aos="fade-up">
 
-                    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);height:100%;">
+                <a href="{{ route('staf.guru.detail', $guru->id_guru) }}" style="text-decoration:none;color:inherit;display:block;height:100%;">
+
+                    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);height:100%;transition:.3s;">
 
                         @if($guru->foto)
 
@@ -60,7 +62,9 @@
 
                     </div>
 
-                </div>
+                </a>
+
+            </div>
 
             @empty
 
@@ -72,10 +76,7 @@
 
         </div>
 
-        <!-- Pagination -->
-        <div class="d-flex justify-content-center mt-5">
-            {{ $gurus->links() }}
-        </div>
+        
 
     </div>
 </section>

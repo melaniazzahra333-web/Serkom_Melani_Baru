@@ -267,22 +267,16 @@
             @yield('content')
         </main>
 
-        <!-- FOOTER -->
         <footer class="site-footer mt-5">
+        <div class="footer-bottom text-center py-3 ">
 
+            <div>
+                <strong>© 2026 {{ $profil->nama_sekolah ?? 'Nama Sekolah' }} </strong>
 
+                Membangun Generasi Cerdas, Berkarakter, dan Berprestasi. 
+            </div>
 
-    <div class="footer-bottom text-center py-3 ">
-
-        <div>
-            <strong>
-                © 2026 SMK YPC TASIKMALAYA.
-            </strong>
-
-            Mencetak Generasi Siap Kerja, Siap Berkarya.
         </div>
-
-    </div>
 
 </footer>
 

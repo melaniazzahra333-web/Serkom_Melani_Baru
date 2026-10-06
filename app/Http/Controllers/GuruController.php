@@ -45,7 +45,7 @@ class GuruController extends Controller
             'nip' => 'required',
             'mapel' => 'required',
             'jabatan' => 'required',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         $foto = null;
@@ -70,10 +70,16 @@ class GuruController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
+{
+    $guru = Guru::findOrFail($id);
 
+    $guruLainnya = Guru::where('jabatan', '!=', 'Kepala Sekolah')
+        ->where('id_guru', '!=', $guru->id_guru)
+        ->latest()
+        ->get();
+
+    return view('landing.guru.detail', compact('guru', 'guruLainnya'));
+}
     /**
      * Show the form for editing the specified resource.
      */
@@ -99,7 +105,7 @@ class GuruController extends Controller
             'nip' => 'required',
             'mapel' => 'required',
             'jabatan' => 'nullable',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $guru->update([
@@ -133,12 +139,11 @@ class GuruController extends Controller
     }
 
     public function stafGuru()
-{
-    $gurus = Guru::orderBy('created_at', 'asc')->paginate(8);
+    {
+        $gurus = Guru::where('jabatan', '!=', 'Kepala Sekolah')
+            ->latest()
+            ->get();
 
-    return view('landing.staf-guru', [
-        'gurus' => $gurus
-    ]);
-}
-
+        return view('landing.guru.index', compact('gurus'));
+    }
 }

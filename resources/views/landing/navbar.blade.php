@@ -3,8 +3,8 @@
     <div class="container">
 
         <a href="#banner" class="navbar-brand d-flex align-items-center">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" style="width:50px;height:50px;object-fit:contain;" class="me-3">
-            <span class="fw-bold">SMK YPC TASIKMALAYA</span>
+            <img src="{{ asset('assets/images/logo1.png') }}" alt="Logo" style="width:70px;height:60px;object-fit:contain;" class="me-3">
+            <span class="fw-bold">SMA LENTERA BANGSA</span>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#sambutan">
+                    <a class="nav-link" href="{{ route('profil.sekolah') }}">
                         <i class="fa-solid fa-building me-1"></i>Profil Sekolah
                     </a>
                 </li>

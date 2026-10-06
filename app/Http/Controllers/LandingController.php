@@ -15,8 +15,8 @@ class LandingController extends Controller
     public function index()
     {
         $berita = Berita::where('status', 'Publish')
-    ->latest()
-    ->first();
+            ->latest()
+            ->first();
 
         $pengumuman = Pengumuman::where('status', 'Publish')
             ->latest('tanggal')
@@ -29,25 +29,33 @@ class LandingController extends Controller
             ->take(4)
             ->get();
 
+
         $ekskuls = Ekstrakurikuler::latest()
-            ->take(2)
-            ->get();
+            ->get()
+            ->groupBy('nama_eskul')
+            ->map(function ($items) {
+                return $items->first();
+            })
+            ->values()
+            ->take(2);
+
+   
 
         $galeris = Galeri::latest()
-    ->get()
-    ->groupBy(function ($item) {
-        return $item->kategori . '|' . $item->judul;
-    })
-    ->map(function ($items) {
-        return (object) [
-            'judul' => $items->first()->judul,
-            'kategori' => $items->first()->kategori,
-            'file' => $items->first()->file,
-            'jumlah' => $items->count(),
-        ];
-    })
-    ->values()
-    ->take(6);
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->kategori . '|' . $item->judul;
+            })
+            ->map(function ($items) {
+                return (object) [
+                    'judul' => $items->first()->judul,
+                    'kategori' => $items->first()->kategori,
+                    'file' => $items->first()->file,
+                    'jumlah' => $items->count(),
+                ];
+            })
+            ->values()
+            ->take(6);
 
         return view('landing.index', [
             'berita' => $berita,

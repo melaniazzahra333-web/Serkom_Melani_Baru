@@ -117,4 +117,11 @@ class ProfilController extends Controller
             ->route('admin.profil')
             ->with('success', 'Profil sekolah berhasil diperbarui.');
     }
+
+public function landing()
+{
+    $profil = Profil::first();
+
+    return view('landing.profil-sekolah', compact('profil'));
+}
 }

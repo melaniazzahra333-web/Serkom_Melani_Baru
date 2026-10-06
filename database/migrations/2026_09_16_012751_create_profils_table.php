@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

@@ -123,7 +123,7 @@
 
                     <input type="file"
                            name="foto"
-                           class="form-control">
+                           class="form-control" accept=".jpg,.jpeg,.png,.webp">
 
                     <small class="text-muted">
                         Pilih foto guru yang akan digunakan.
