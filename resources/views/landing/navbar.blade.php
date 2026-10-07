@@ -75,7 +75,6 @@
                         <i class="fa-solid fa-building me-1"></i>Profil Sekolah
                     </a>
                 </li>
-
             </ul>
         </div>
     </div>

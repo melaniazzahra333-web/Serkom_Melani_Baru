@@ -9,7 +9,7 @@
                 </div>
                 <div class="d-flex align-items-start" style="gap:15px;">
                     <i class="fa-solid fa-location-dot" style="width:20px;margin-top:5px;"></i>
-                    <span>Jl. Garut - Tasikmalaya, Cikunten Singaparna Tasikmalaya, Jawa Barat 46414</span>
+                    <span>Jl. Pendidikan No. 25, Kelurahan Sukamaju, Kecamatan Cibeureum, Kota Tasikmalaya, Jawa Barat 46196.</span>
                 </div>
             </div>
             <div class="col-md-6" data-aos="fade-left">

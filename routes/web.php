@@ -131,13 +131,13 @@ Route::get('/staf-guru', [GuruController::class, 'stafGuru'])->name('staf.guru')
 Route::get('/staf-guru/{id}', [GuruController::class, 'show'])->name('staf.guru.detail');
 
 Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'landing'])->name('ekstrakurikuler');
-Route::get('/ekstrakurikuler/{id}', [EkstrakurikulerController::class, 'detail'])->name('ekstrakurikuler.detail');
+Route::get('/ekstrakurikuler/{slug}', [EkstrakurikulerController::class, 'detail'])->name('ekstrakurikuler.detail');
 
 Route::get('/prestasi', [PrestasiController::class, 'landing'])->name('prestasi');
 Route::get('/pengumuman', [PengumumanController::class, 'landing'])->name('pengumuman');
 
 Route::get('/berita', [BeritaController::class, 'landing'])->name('berita');
-Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.detail');
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.detail');
 
 Route::get('/galeri', [GaleriController::class, 'landing'])->name('galeri');
 Route::get('/galeri/{kategori}/{judul}', [GaleriController::class, 'detail'])->name('galeri.detail');

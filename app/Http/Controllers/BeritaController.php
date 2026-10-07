@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
@@ -52,7 +53,8 @@ class BeritaController extends Controller
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'status' => 'required|in:Publish,Draft',
-            // 'slug' => 'required|unique:berita,slug', 
+            // 'slug' => 'required|unique:berita,slug',
+             
         ]);
 
         $gambar = null;
@@ -73,7 +75,7 @@ class BeritaController extends Controller
             'gambar' => $gambar,
             'status' => $request->status,
             'id_user' => $user->id_user,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->judul),
         ]);
 
         return redirect()->route('admin.berita')->with('success', 'Berita berhasil ditambahkan.');
@@ -89,9 +91,11 @@ class BeritaController extends Controller
         return view('admin.berita.edit', compact('berita'));
     }
 
-    public function show($id)
+    public function show($slug)
 {
-      $berita = Berita::where('status', 'Publish')->findOrFail($id);
+      $berita = Berita::where('status', 'Publish')
+        ->where('slug', $slug)
+        ->firstOrFail();
 
     $beritaLainnya = Berita::where('status', 'Publish')
         ->where('id_berita', '!=', $berita->id_berita)
@@ -122,6 +126,7 @@ class BeritaController extends Controller
             'isi' => $request->isi,
             'tanggal' => $request->tanggal,
             'status' => $request->status,
+            'slug' => Str::slug($request->judul),
         ]);
 
         if ($request->hasFile('gambar')) {

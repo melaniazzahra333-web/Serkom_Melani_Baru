@@ -191,7 +191,7 @@
 
         <!-- LIHAT WEBSITE -->
         <div class="sidebar-profile sidebar-website-only">
-            <a href="https://ic.sch.id/" target="_blank" class="sidebar-website-link">
+            <a href="{{ route('home') }}" target="_blank" class="sidebar-website-link">
                 <span>Lihat Website</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
         </div>

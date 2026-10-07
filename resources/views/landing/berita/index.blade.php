@@ -35,7 +35,7 @@
 
                 <div class="col-md-6">
 
-                    <a href="{{ route('berita.detail', $item->id_berita) }}" style="text-decoration:none;color:inherit;">
+                    <a href="{{ route('berita.detail', $item->slug) }}" style="text-decoration:none;color:inherit;">
 
                         <div class="card h-100 hover-card" style="border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;">
 

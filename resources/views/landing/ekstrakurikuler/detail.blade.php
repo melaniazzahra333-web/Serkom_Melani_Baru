@@ -127,12 +127,12 @@
                 </h3>
 
                 <div style="font-size:16px;line-height:1.9;color:#555;">
-    @foreach($deskripsi as $isi)
-        <p style="margin-bottom:20px;">
-            {!! nl2br(e($isi)) !!}
-        </p>
-    @endforeach
-</div>
+                    @foreach($deskripsi as $isi)
+                        <p style="margin-bottom:20px;">
+                            {!! nl2br(e($isi)) !!}
+                        </p>
+                    @endforeach
+                </div>
 
             </div>
 
@@ -177,7 +177,7 @@
                                 {{ $eskul->pembina }}
                             </p>
 
-                            <a href="{{ route('ekstrakurikuler.detail', $eskul->id_eskul) }}" style="font-size:14px;color:#005baa;text-decoration:none;">
+                            <a href="{{ route('ekstrakurikuler.detail', $eskul->slug) }}" style="font-size:14px;color:#005baa;text-decoration:none;">
                                 Selengkapnya »
                             </a>
 

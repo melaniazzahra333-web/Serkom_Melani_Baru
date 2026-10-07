@@ -95,7 +95,7 @@
                 <div class="mb-3">
 
                     <label class="form-label fw-semibold">
-                        <i class="fa-solid fa-align-left me-1" style="color:#244D73;"></i>
+                        <i class="fa-solid fa-align-left me-1" style="color:#244D73;" rows="8"></i>
                         Isi Berita
                     </label>
 

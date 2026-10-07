@@ -70,7 +70,6 @@
                         @forelse($ekstrakurikulers as $ekstrakurikuler)
 
                             <tr>
-
                                 {{-- NO --}}
                                 <td>{{ $loop->iteration }}</td>
 

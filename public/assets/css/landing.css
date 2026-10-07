@@ -11,6 +11,7 @@ body{
     padding-top:76px;
     font-family:Arial,sans-serif;
     color:#333;
+    font-family:Arial,sans-serif !important;
 }
 
 
@@ -528,11 +529,19 @@ body{
     color:#fff;
 }
 
+.home-text{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:6;
+    overflow:hidden;
+    font-family:Arial,sans-serif !important;
+}
+
 
 /* =========================
    GALERI
 ========================= */
-
+    
 .galeri-card{
     background:#fff;
     border-radius:14px;
@@ -632,4 +641,48 @@ body{
         padding:25px;
     }
 
+}
+
+.navbar-toggler{
+    border:2px solid #005baa !important;
+    background:#fff !important;
+    box-shadow:none !important;
+    padding:6px 8px !important;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active{
+    outline:none !important;
+    box-shadow:none !important;
+    background:#fff !important;
+}
+
+.navbar-toggler-icon{
+    background-image:none !important;
+    width:24px;
+    height:18px;
+    position:relative;
+    display:block;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after,
+.navbar-toggler-icon{
+    border-top:3px solid #005baa;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after{
+    content:"";
+    position:absolute;
+    left:0;
+    width:24px;
+}
+
+.navbar-toggler-icon::before{
+    top:5px;
+}
+
+.navbar-toggler-icon::after{
+    top:13px;
 }

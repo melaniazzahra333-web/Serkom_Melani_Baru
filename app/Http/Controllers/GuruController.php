@@ -1,45 +1,46 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use App\Models\Guru;
 use Illuminate\Http\Request;
+
 class GuruController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Menampilkan semua data guru di halaman admin
     public function index(Request $request)
     {
+        // Mengambil kata pencarian dari input search
         $search = $request->search;
 
-        $gurus = Guru::query()
-            ->when($search, function ($query) use ($search) {
-                $query->where('nama_guru', 'like', '%' . $search . '%')
-                    ->orWhere('nip', 'like', '%' . $search . '%')
-                    ->orWhere('jabatan', 'like', '%' . $search . '%')
-                    ->orWhere('mapel', 'like', '%' . $search . '%');
-            })
-            ->orderBy('created_at', 'asc')
-            ->get();
+        // Membuat query untuk mengambil data guru
+        $gurus = Guru::query();
 
+        // Jika ada pencarian, cari berdasarkan nama, NIP, jabatan, atau mata pelajaran
+        if ($search) {
+            $gurus->where('nama_guru', 'like', "%$search%")
+                ->orWhere('nip', 'like', "%$search%")
+                ->orWhere('jabatan', 'like', "%$search%")
+                ->orWhere('mapel', 'like', "%$search%");
+        }
+
+        // Mengurutkan data dari yang paling lama dibuat lalu mengambil semua data
+        $gurus = $gurus->orderBy('created_at', 'asc')->get();
+
+        // Mengirim data guru dan search ke halaman admin guru
+        // compact() digunakan untuk mengirim beberapa variabel ke view dengan lebih singkat
         return view('admin.guru.index', compact('gurus', 'search'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Menampilkan form untuk menambah data guru
     public function create()
     {
-        //
         return view('admin.guru.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Menyimpan data guru baru ke database
     public function store(Request $request)
     {
-
+        // Mengecek agar data yang wajib diisi tidak kosong
         $request->validate([
             'nama_guru' => 'required',
             'nip' => 'required',
@@ -48,12 +49,16 @@ class GuruController extends Controller
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
+        // Menyiapkan foto dengan nilai awal kosong
         $foto = null;
 
+        // Mengecek apakah user mengupload foto
         if ($request->hasFile('foto')) {
+            // Menyimpan foto ke folder storage/app/public/foto-guru
             $foto = $request->file('foto')->store('foto-guru', 'public');
         }
 
+        // Menyimpan data guru ke database
         Guru::create([
             'nama_guru' => $request->nama_guru,
             'nip' => $request->nip,
@@ -62,88 +67,90 @@ class GuruController extends Controller
             'foto' => $foto
         ]);
 
-        return redirect()->route('admin.guru');
-
+        // Kembali ke halaman guru setelah berhasil menyimpan
+        return redirect()->route('admin.guru')->with('success', 'Data guru berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-{
-    $guru = Guru::findOrFail($id);
-
-    $guruLainnya = Guru::where('jabatan', '!=', 'Kepala Sekolah')
-        ->where('id_guru', '!=', $guru->id_guru)
-        ->latest()
-        ->get();
-
-    return view('landing.guru.detail', compact('guru', 'guruLainnya'));
-}
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // Menampilkan form edit berdasarkan ID guru
+    public function edit($id)
     {
-        //
-         $guru = Guru::findOrFail($id);
-
-        return view('admin.guru.edit', compact('guru'));
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        // Mencari data guru berdasarkan ID
         $guru = Guru::findOrFail($id);
 
+        // Mengirim data guru ke halaman edit
+        return view('admin.guru.edit', compact('guru'));
+    }
+
+    // Mengubah data guru yang sudah ada
+    public function update(Request $request, $id)
+    {
+        // Mencari guru berdasarkan ID
+        $guru = Guru::findOrFail($id);
+
+        // Mengecek data yang akan diubah
         $request->validate([
             'nama_guru' => 'required',
             'nip' => 'required',
             'mapel' => 'required',
             'jabatan' => 'nullable',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
+        // Mengubah data guru
         $guru->update([
             'nama_guru' => $request->nama_guru,
             'nip' => $request->nip,
             'mapel' => $request->mapel,
-            'jabatan' => $request->jabatan,
+            'jabatan' => $request->jabatan
         ]);
 
+        // Jika ada foto baru, maka foto lama diganti dengan foto baru
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto-guru', 'public');
-
             $guru->update([
-                'foto' => $foto,
+                'foto' => $request->file('foto')->store('foto-guru', 'public')
             ]);
         }
 
+        // Kembali ke halaman guru setelah berhasil mengubah data
         return redirect()->route('admin.guru')->with('success', 'Data guru berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Menghapus data guru
+    public function destroy($id)
     {
-        //
+        // Mencari guru berdasarkan ID
         $guru = Guru::findOrFail($id);
+
+        // Menghapus data guru dari database
         $guru->delete();
 
-        return redirect()->route('admin.guru');
+        // Kembali ke halaman guru dengan pesan berhasil
+        return redirect()->route('admin.guru')->with('success', 'Data guru berhasil dihapus.');
     }
 
+    // Menampilkan data guru di halaman landing
     public function stafGuru()
     {
-        $gurus = Guru::where('jabatan', '!=', 'Kepala Sekolah')
+        // Mengambil semua guru kecuali Kepala Sekolah
+        $gurus = Guru::where('jabatan', '!=', 'Kepala Sekolah')->latest()->get();
+
+        // Mengirim data guru ke halaman landing
+        return view('landing.guru.index', compact('gurus'));
+    }
+
+    // Menampilkan detail satu guru di halaman landing
+    public function show($id)
+    {
+        // Mencari guru berdasarkan ID
+        $guru = Guru::findOrFail($id);
+
+        // Mengambil guru lainnya, kecuali Kepala Sekolah dan guru yang sedang dibuka
+        $guruLainnya = Guru::where('jabatan', '!=', 'Kepala Sekolah')
+            ->where('id_guru', '!=', $guru->id_guru)
             ->latest()
             ->get();
 
-        return view('landing.guru.index', compact('gurus'));
+        // Mengirim data guru dan guru lainnya ke halaman detail
+        return view('landing.guru.detail', compact('guru', 'guruLainnya'));
     }
 }

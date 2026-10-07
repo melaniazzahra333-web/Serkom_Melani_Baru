@@ -24,13 +24,13 @@
 
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('assets/images/baner1.png') }}" class="d-block w-100" alt="Banner Sekolah 1">
+            <img src="{{ asset('assets/images/foto1.png') }}" class="d-block w-100" alt="Banner Sekolah 1">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('assets/images/baner2.png') }}" class="d-block w-100" alt="Banner Sekolah 2">
+            <img src="{{ asset('assets/images/foto2.png') }}" class="d-block w-100" alt="Banner Sekolah 2">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('assets/images/baner1.png') }}" class="d-block w-100" alt="Banner Sekolah 3">
+            <img src="{{ asset('assets/images/foto3.png') }}" class="d-block w-100" alt="Banner Sekolah 3">
         </div>
     </div>
 
@@ -50,7 +50,9 @@
 
             <div class="col-md-3 text-center" data-aos="fade-right">
                 <div class="kepala-sekolah-img">
-                    <img src="{{ asset('assets/images/kpl.jpg') }}" alt="Kepala Sekolah">
+                    @if($kepalaSekolah && $kepalaSekolah->foto)
+                        <img src="/storage/{{ $kepalaSekolah->foto }}" alt="{{ $kepalaSekolah->nama_guru }}">
+                    @endif
                 </div>
             </div>
 
@@ -73,8 +75,8 @@
                 </p>
 
                 <hr>
-                <h5 class="fw-bold mb-1">Drs. Melani Azahra, M.M</h5>
-                <div>Kepala Sekolah</div>
+                <strong>{{ $kepalaSekolah->nama_guru ?? '-' }}</strong>
+                <div>{{ $kepalaSekolah->jabatan ?? '-' }}</div>
             </div>
 
         </div>
@@ -96,7 +98,7 @@
                             <i class="fa-solid fa-bullhorn"></i> Pengumuman
                         </h3>
 
-                        <hr>
+                        <hr>    
 
                         @foreach($pengumuman as $item)
                             <div style="margin-bottom:20px;">
@@ -119,7 +121,6 @@
             <div class="col-lg-4" id="prestasi" data-aos="fade-up" data-aos-delay="150">
                 <div class="card h-100 info-card">
                     <div class="card-body">
-
                         <h3 style="color:#0866b3;font-size:22px;">
                             <i class="fa-solid fa-trophy"></i> Prestasi
                         </h3>
@@ -134,7 +135,7 @@
                                 </div>
                             @endif
 
-                            <h5 style="font-size:16px;">{{ $prestasis->deskripsi }}</h5>
+                            <h5 style="font-size:16px; ">{{ $prestasis->deskripsi }}</h5>
                             <small style="color:#888;">Tahun Ajaran {{ $prestasis->tahun_ajaran }}</small>
                             <br>
 
@@ -174,7 +175,7 @@
 
                             <h5 style="font-size:16px;">{{ $berita->judul }}</h5>
                             <small style="color:#888;">{{ $berita->tanggal }}</small>
-                            <p style="font-size:14px;color:#666;margin-top:8px;">{{ $berita->isi }}</p>
+                            <p style="font-size:14px;color:#666;margin-top:8px;" class="home-text">{{ $berita->isi }}</p>
 
                         @else
 
@@ -196,55 +197,35 @@
 <!-- KEUNGGULAN -->
 <section class="keunggulan">
     <div class="container">
-
         <div class="section-title" data-aos="fade-down">
             <span>KEUNGGULAN SEKOLAH</span>
             <h2>Mengapa Kami Menjadi Pilihan Tepat</h2>
             <hr>
-            <p>
-                Kami berkomitmen memberikan pendidikan berkualitas melalui pembelajaran
-                yang mendukung prestasi, pengembangan potensi siswa, dan pembentukan karakter.
-            </p>
+            <p>Kami memberikan pendidikan berkualitas untuk mendukung prestasi dan potensi siswa.</p>
         </div>
 
         <div class="row g-4">
-
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-4" data-aos="fade-up">
                 <div class="keunggulan-card">
-                    <div class="keunggulan-icon">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <h4>Pendidikan Akademik Berkualitas</h4>
-                    <p>
-                        Guru berpengalaman dan kompeten dalam memberikan pembelajaran
-                        yang efektif untuk mendukung prestasi siswa.
-                    </p>
+                    <div class="keunggulan-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h4>Pendidikan Berkualitas</h4>
+                    <p>Guru kompeten membantu siswa mendapatkan pembelajaran yang baik.</p>
                 </div>
             </div>
 
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-4" data-aos="fade-up">
                 <div class="keunggulan-card">
-                    <div class="keunggulan-icon">
-                        <i class="fa-solid fa-lightbulb"></i>
-                    </div>
-                    <h4>Pengembangan Minat & Bakat</h4>
-                    <p>
-                        Berbagai kegiatan membantu siswa mengembangkan minat,
-                        bakat, kreativitas, dan potensi diri.
-                    </p>
+                    <div class="keunggulan-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h4>Minat & Bakat</h4>
+                    <p>Siswa dapat mengembangkan minat, bakat, kreativitas, dan potensi diri.</p>
                 </div>
             </div>
 
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-md-4" data-aos="fade-up">
                 <div class="keunggulan-card">
-                    <div class="keunggulan-icon">
-                        <i class="fa-solid fa-school"></i>
-                    </div>
-                    <h4>Persiapan Pendidikan Lanjutan</h4>
-                    <p>
-                        Membekali siswa dengan pengetahuan, keterampilan,
-                        dan karakter untuk pendidikan selanjutnya.
-                    </p>
+                    <div class="keunggulan-icon"><i class="fa-solid fa-school"></i></div>
+                    <h4>Pendidikan Lanjutan</h4>
+                    <p>Siswa dibekali pengetahuan dan keterampilan untuk melanjutkan pendidikan.</p>
                 </div>
             </div>
         </div>
@@ -253,7 +234,7 @@
 
 
 <!-- GURU & STAF -->
-<div id="guru" style="padding:60px 0;">
+<div id="guru" style="padding:60px 0;"> 
     <div class="container">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
             <div>
@@ -315,7 +296,7 @@
 
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
 
-                    <a href="{{ route('ekstrakurikuler.detail', $eskul->id_eskul) }}">
+                    <a href="{{ route('ekstrakurikuler.detail',  $eskul->slug) }}">
 
                         <div class="eskul-card">
 

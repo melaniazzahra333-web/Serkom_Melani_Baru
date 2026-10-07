@@ -64,14 +64,11 @@
                                 {{ $items->count() }} Dokumentasi
                             </p>
 
-                            <a href="{{ route('ekstrakurikuler.detail', $eskul->id_eskul) }}" style="font-size:14px;color:#222;text-decoration:none;border-bottom:1px dotted #333;width:max-content;padding-bottom:2px;">
+                            <a href="{{ route('ekstrakurikuler.detail', $eskul->slug) }}" style="font-size:14px;color:#222;text-decoration:none;border-bottom:1px dotted #333;width:max-content;padding-bottom:2px;">
                                 Selengkapnya »
                             </a>
-
                         </div>
-
                     </div>
-
                 </div>
 
             @empty

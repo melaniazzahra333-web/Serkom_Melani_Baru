@@ -65,7 +65,7 @@
 
                 @endif
 
-                <p style="font-size:16px;line-height:1.9;color:#333;">
+                <p style="font-size:16px;line-height:1.9;color:#333;white-space:pre-line;">
                     {{ $berita->isi }}
                 </p>
 
@@ -88,7 +88,7 @@
 
                 @foreach($beritaLainnya as $item)
 
-                    <a href="{{ route('berita.detail', $item->id_berita) }}"
+                    <a href="{{ route('berita.detail', $item->slug) }}"
                        style="text-decoration:none;color:inherit;">
 
                         <div style="display:flex;gap:15px;margin-bottom:25px;">
