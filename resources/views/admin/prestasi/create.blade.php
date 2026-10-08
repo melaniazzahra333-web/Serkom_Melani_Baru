@@ -9,10 +9,6 @@
             <h2 class="fw-bold mb-1" style="color:#244D73;"><i class="fa-solid fa-trophy me-2"></i>Tambah Prestasi</h2>
             <p class="text-muted mb-0">Tambahkan data prestasi sekolah</p>
         </div>
-
-        <!-- <a href="{{ route('admin.prestasi') }}" class="btn btn-secondary">
-            <i class="fa-solid fa-arrow-left me-1"></i>Kembali
-        </a> -->
     </div>
 
     <div class="card border-0 shadow-sm">

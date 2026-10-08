@@ -9,11 +9,9 @@ class GuruController extends Controller
     // Menampilkan semua data guru di halaman admin
     public function index(Request $request)
     {
-        // Mengambil kata pencarian dari input search
-        $search = $request->search;
+        $search = $request->search;  // Mengambil kata pencarian dari input search
 
-        // Membuat query untuk mengambil data guru
-        $gurus = Guru::query();
+        $gurus = Guru::query();  // Membuat query untuk mengambil data guru
 
         // Jika ada pencarian, cari berdasarkan nama, NIP, jabatan, atau mata pelajaran
         if ($search) {
@@ -23,8 +21,7 @@ class GuruController extends Controller
                 ->orWhere('mapel', 'like', "%$search%");
         }
 
-        // Mengurutkan data dari yang paling lama dibuat lalu mengambil semua data
-        $gurus = $gurus->orderBy('created_at', 'asc')->get();
+        $gurus = $gurus->orderBy('created_at', 'asc')->get();  // Mengurutkan data dari yang paling lama dibuat lalu mengambil semua data
 
         // Mengirim data guru dan search ke halaman admin guru
         // compact() digunakan untuk mengirim beberapa variabel ke view dengan lebih singkat
@@ -54,8 +51,8 @@ class GuruController extends Controller
 
         // Mengecek apakah user mengupload foto
         if ($request->hasFile('foto')) {
-            // Menyimpan foto ke folder storage/app/public/foto-guru
-            $foto = $request->file('foto')->store('foto-guru', 'public');
+           
+            $foto = $request->file('foto')->store('foto-guru', 'public');  // Menyimpan foto ke folder storage/app/public/foto-guru
         }
 
         // Menyimpan data guru ke database
@@ -74,8 +71,7 @@ class GuruController extends Controller
     // Menampilkan form edit berdasarkan ID guru
     public function edit($id)
     {
-        // Mencari data guru berdasarkan ID
-        $guru = Guru::findOrFail($id);
+        $guru = Guru::findOrFail($id);  // Mencari data guru berdasarkan ID
 
         // Mengirim data guru ke halaman edit
         return view('admin.guru.edit', compact('guru'));
@@ -146,9 +142,7 @@ class GuruController extends Controller
 
         // Mengambil guru lainnya, kecuali Kepala Sekolah dan guru yang sedang dibuka
         $guruLainnya = Guru::where('jabatan', '!=', 'Kepala Sekolah')
-            ->where('id_guru', '!=', $guru->id_guru)
-            ->latest()
-            ->get();
+            ->where('id_guru', '!=', $guru->id_guru)->latest()->get();
 
         // Mengirim data guru dan guru lainnya ke halaman detail
         return view('landing.guru.detail', compact('guru', 'guruLainnya'));

@@ -39,33 +39,20 @@
             </h3>
 
             <div id="carouselDokumentasi" class="carousel slide" data-bs-ride="false">
-
                 <div class="carousel-inner">
-
                     @foreach($galeri->chunk(2) as $index => $fotoGroup)
-
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-
                             <div class="row g-4">
-
                                 @foreach($fotoGroup as $foto)
-
                                     <div class="col-md-6">
-
                                         <img src="{{ asset('storage/'.$foto->gambar) }}"
                                              alt="{{ $ekstrakurikuler->nama_eskul }}"
                                              style="width:100%;height:320px;object-fit:cover;border-radius:14px;">
-
                                     </div>
-
                                 @endforeach
-
                             </div>
-
                         </div>
-
                     @endforeach
-
                 </div>
 
                 @if($galeri->count() > 2)

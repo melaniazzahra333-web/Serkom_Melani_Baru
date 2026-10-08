@@ -12,17 +12,17 @@ return new class extends Migration
             $table->string('slug')->nullable()->after('judul');
         });
 
-        Schema::table('guru', function (Blueprint $table) {
-            $table->string('slug')->nullable()->after('nama_guru');
-        });
+        // Schema::table('guru', function (Blueprint $table) {
+        //     $table->string('slug')->nullable()->after('nama_guru');
+        // });
 
         Schema::table('ekstrakurikuler', function (Blueprint $table) {
             $table->string('slug')->nullable()->after('nama_eskul');
         });
 
-        Schema::table('galeri', function (Blueprint $table) {
-            $table->string('slug')->nullable()->after('judul');
-        });
+        // Schema::table('galeri', function (Blueprint $table) {
+        //     $table->string('slug')->nullable()->after('judul');
+        // });
     }
 
     public function down(): void
@@ -31,16 +31,16 @@ return new class extends Migration
             $table->dropColumn('slug');
         });
 
-        Schema::table('guru', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        // Schema::table('guru', function (Blueprint $table) {
+        //     $table->dropColumn('slug');
+        // });
 
         Schema::table('ekstrakurikuler', function (Blueprint $table) {
             $table->dropColumn('slug');
         });
 
-        Schema::table('galeri', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        // Schema::table('galeri', function (Blueprint $table) {
+        //     $table->dropColumn('slug');
+        // });
     }
 };

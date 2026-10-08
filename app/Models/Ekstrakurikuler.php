@@ -24,11 +24,12 @@ class Ekstrakurikuler extends Model
         'gambar',
     ];
 
-    protected static function boot()
+    protected static function boot() //membuat id otomatis menggunakan UUID saat membuat data baru
     {
         parent::boot();
 
         static::creating(function ($eskul) {
+             // Jika ID belum ada, buat ID menggunakan UUID
             if (!$eskul->id_eskul) {
                 $eskul->id_eskul = (string) Str::uuid();
             }

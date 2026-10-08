@@ -25,12 +25,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth.admin')->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::get('profile', [UserController::class, 'profile'])->name('admin.user.profile');
     Route::put('profile', [UserController::class, 'updateProfile'])->name('admin.user.profile.update');
-    // Route::get('profile/edit', [UserController::class, 'editProfile'])->name('admin.user.profile.edit');
 
 
     // user
@@ -42,7 +40,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('admin.user.edit');
     Route::put('user/{id}', [UserController::class, 'update'])->name('admin.user.update');
     Route::delete('user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
-});
+    });
 
 
     // guru
@@ -125,6 +123,7 @@ Route::middleware('auth.admin')->group(function () {
 //     return view('landing.index');
 // });
 
+// INI BUAT HALAMAN LANDING PAGE
 
 // halaman Staf & Guru
 Route::get('/staf-guru', [GuruController::class, 'stafGuru'])->name('staf.guru');

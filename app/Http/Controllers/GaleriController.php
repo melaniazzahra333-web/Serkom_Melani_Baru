@@ -52,7 +52,7 @@ class GaleriController extends Controller
         if ($request->kategori == 'Foto') {
 
             $request->validate([
-                'file' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+                'file' => 'required|image|mimes:jpg,jpeg,png,webp|max:20480',
             ]);
 
             $file = $request->file('file')->store('galeri', 'public');

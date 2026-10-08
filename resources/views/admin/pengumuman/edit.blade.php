@@ -12,10 +12,6 @@
             </h2>
             <p class="text-muted mb-0">Ubah informasi pengumuman</p>
         </div>
-
-        <!-- <a href="{{ route('admin.pengumuman') }}" class="btn btn-secondary">
-            <i class="fa-solid fa-arrow-left me-1"></i>Kembali
-        </a> -->
     </div>
 
     {{-- FORM EDIT --}}

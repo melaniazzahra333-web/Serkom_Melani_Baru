@@ -28,8 +28,7 @@ class BeritaController extends Controller
             ->when($status, function ($query) use ($status) {
                 $query->where('status', $status);
             })
-            ->latest()
-            ->get();
+            ->latest()->get();
 
             return view('admin.berita.index', compact('beritas','search','status'));
     }
@@ -53,7 +52,7 @@ class BeritaController extends Controller
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'status' => 'required|in:Publish,Draft',
-            // 'slug' => 'required|unique:berita,slug',
+            
              
         ]);
 

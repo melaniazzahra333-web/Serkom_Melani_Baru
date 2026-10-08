@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Berita;
+use App\Models\Berita; // Mengambil data berita
 use App\Models\Pengumuman;
 use App\Models\Prestasi;
 use App\Models\Guru;
@@ -15,11 +15,11 @@ class LandingController extends Controller
 {
     public function index()
     {
-       $kepalaSekolah = Guru::where('jabatan', 'Kepala Sekolah')->first();
+       $kepalaSekolah = Guru::where('jabatan', 'Kepala Sekolah')->first();  // Mengambil 1 guru yang jabatannya Kepala Sekolah
 
-        $berita = Berita::where('status', 'Publish')->latest()->first();
+        $berita = Berita::where('status', 'Publish')->latest()->first(); // Mengambil 1 berita yang statusnya Publish dan paling terbaru
 
-        $pengumuman = Pengumuman::where('status', 'Publish')->latest('tanggal')->take(2)->get();
+        $pengumuman = Pengumuman::where('status', 'Publish')->latest('tanggal')->take(2)->get();  // Mengambil 2 pengumuman yang Publish dan paling terbaru berdasarkan tanggal
 
         $prestasis = Prestasi::latest()->first();
 
@@ -31,7 +31,7 @@ class LandingController extends Controller
             })->values()->take(2);
 
    
-        $galeris = Galeri::latest()->get()->groupBy(function ($item) {
+        $galeris = Galeri::latest()->get()->groupBy(function ($item) {   // Mengelompokkan galeri berdasarkan kategori dan judul
                 return $item->kategori . '|' . $item->judul;
             })
             ->map(function ($items) {
