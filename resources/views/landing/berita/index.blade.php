@@ -21,12 +21,25 @@
             <span style="color:#777;font-size:14px;"> » Berita Sekolah</span>
         </div>
 
-        <div style="margin-bottom:35px;">
-            <div style="font-size:14px;letter-spacing:2px;color:#e99b00;">INFORMASI SEKOLAH</div>
-            <h2 style="font-size:32px;font-weight:700;color:#005baa;margin-top:5px;">
-                Berita Sekolah
-            </h2>
-            <div style="width:200px;height:4px;background:#e9a000;margin:14px 0 0;"></div>
+        <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:35px;gap:20px;">
+            <div>
+                <div style="font-size:14px;letter-spacing:2px;color:#e99b00;">INFORMASI SEKOLAH</div>
+                <h2 style="font-size:32px;font-weight:700;color:#005baa;margin-top:5px;">Berita Sekolah</h2>
+                <div style="width:200px;height:4px;background:#e9a000;margin:14px 0 0;"></div>
+            </div>
+
+            <form action="{{ route('berita') }}" method="GET" style="display:flex;gap:8px;margin-bottom:3px;">
+                <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Cari berita..." style="width:220px;padding:10px 12px;border:1px solid #ddd;border-radius:6px;">
+                <button type="submit" style="background:#005baa;color:#fff;border:none;padding:10px 15px;border-radius:6px;">
+                    <i class="fa-solid fa-magnifying-glass"></i> Mencari
+                </button>
+
+                @if(!empty($search))
+                    <a href="{{ route('berita') }}" style="background:#e99b00;color:#fff;padding:10px 15px;border-radius:6px;text-decoration:none;">
+                        Reset
+                    </a>
+                @endif
+            </form>
         </div>
 
         <div class="row g-4">
@@ -34,9 +47,7 @@
             @forelse($beritas as $item)
 
                 <div class="col-md-6">
-
                     <a href="{{ route('berita.detail', $item->slug) }}" style="text-decoration:none;color:inherit;">
-
                         <div class="card h-100 hover-card" style="border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;">
 
                             @if($item->gambar)
@@ -44,7 +55,6 @@
                             @endif
 
                             <div class="card-body">
-
                                 <h4 style="font-size:20px;font-weight:600;color:#005baa;">
                                     <i class="fa-solid fa-newspaper me-2"></i>{{ $item->judul }}
                                 </h4>
@@ -61,19 +71,17 @@
                                 <span style="color:#0866b3;font-size:14px;font-weight:600;">
                                     Baca Selengkapnya »
                                 </span>
-
                             </div>
 
                         </div>
-
                     </a>
-
                 </div>
 
             @empty
 
-                <div class="col-12 text-center">
-                    <p style="color:#777;">Belum ada berita.</p>
+                <div class="col-12 text-center" style="padding:70px 0;">
+                    <h3 style="color:#555;font-size:24px;font-weight:600;">Berita Tidak Ditemukan</h3>
+                    <p style="color:#888;margin-top:10px;">Maaf, berita yang kamu cari tidak tersedia.</p>
                 </div>
 
             @endforelse
@@ -86,6 +94,13 @@
 @include('landing.footer')
 
 <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration:800,
+        once:true
+    });
+</script>
 
 </body>
 </html>

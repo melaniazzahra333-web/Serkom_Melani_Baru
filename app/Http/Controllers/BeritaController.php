@@ -152,12 +152,24 @@ class BeritaController extends Controller
         return redirect()->route('admin.berita')->with('success', 'Berita berhasil dihapus.');
     }
 
-   public function landing()
+public function landing(Request $request)
 {
-    $beritas = Berita::where('status', 'Publish')
-        ->latest()
-        ->get();
+    $search = $request->search;
 
-    return view('landing.berita.index', compact('beritas'));
+    if ($search) {
+        $beritas = Berita::where('status', 'Publish')
+            ->where(function ($query) use ($search) {
+                $query->where('judul', 'like', "%$search%")
+                      ->orWhere('isi', 'like', "%$search%");
+            })
+            ->latest()
+            ->get();
+    } else {
+        $beritas = Berita::where('status', 'Publish')
+            ->latest()
+            ->get();
+    }
+
+    return view('landing.berita.index', compact('beritas', 'search'));
 }
 }

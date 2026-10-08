@@ -65,6 +65,9 @@
                                     <i class="fa-regular fa-calendar me-1"></i>
                                     Tahun Ajaran {{ $prestasi->tahun_ajaran }}
                                 </p>
+                                <a href="{{ route('prestasi.detail', $prestasi->id_prestasi ) }}" style="display:inline-block;margin-top:15px;color:#005baa;text-decoration:none;font-size:14px;">
+                                    Selengkapnya »
+                                </a>
 
                             </div>
 

@@ -103,7 +103,7 @@
                         @foreach($pengumuman as $item)
                             <div style="margin-bottom:20px;">
                                 <h5 style="font-size:16px;">{{ $item->judul }}</h5>
-                                <small style="color:#888;">{{ $item->tanggal }}</small>
+                                <small style="color:#888;">{{ substr($item->tanggal, 0, 10) }}</small>
                                 <p style="font-size:14px;color:#666;margin-top:8px;">{{ $item->isi }}</p>
                             </div>
                         @endforeach
@@ -135,7 +135,7 @@
                                 </div>
                             @endif
 
-                            <h5 style="font-size:16px; ">{{ $prestasis->deskripsi }}</h5>
+                            <p style="font-size:14px;color:#666;margin-top:8px;">{{ $prestasis->deskripsi }}</p>
                             <small style="color:#888;">Tahun Ajaran {{ $prestasis->tahun_ajaran }}</small>
                             <br>
 

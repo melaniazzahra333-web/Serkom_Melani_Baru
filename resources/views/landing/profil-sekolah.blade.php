@@ -16,97 +16,78 @@
 <section style="padding:50px 0 70px;background:#fff;">
     <div class="container">
 
-        <div style="padding-bottom:18px;border-bottom:1px solid #eee;margin-bottom:40px;">
+        <!-- BREADCRUMB -->
+        <div style="padding-bottom:18px;border-bottom:1px solid #eee;margin-bottom:45px;">
             <a href="{{ url('/') }}" style="text-decoration:none;color:#333;font-size:14px;">Beranda</a>
             <span style="color:#777;"> » Profil Sekolah</span>
         </div>
 
-        <div style="margin-bottom:40px;" data-aos="fade-down">
-            <span style="color:#e99b00;font-size:14px;letter-spacing:2px;">TENTANG SEKOLAH</span>
-            <h2 style="color:#005baa;font-size:32px;font-weight:700;margin-top:5px;">Profil Sekolah</h2>
-            <div style="width:180px;height:4px;background:#e9a000;margin:12px 0;"></div>
-            <p style="color:#666;">Mengenal lebih dekat {{ $profil->nama_sekolah ?? 'sekolah kami' }}</p>
+        <!-- JUDUL PROFIL -->
+        <div style="text-align:center;margin-bottom:50px;position:relative;" data-aos="fade-down">
+            <div style="font-size:30px;font-weight:800;color:#f1f3f5;line-height:1;letter-spacing:2px;position:absolute;left:0;right:0;top:-8px;">
+                PROFIL SEKOLAH
+            </div>
+            <div style="position:relative;">
+                <!-- <span style="color:#e99b00;font-size:14px;letter-spacing:2px;">TENTANG SEKOLAH</span> -->
+                <h2 style="color:#005baa;font-size:32px;font-weight:700;margin-top:5px;margin-bottom:12px;">Profil Sekolah</h2>
+                <div style="width:150px;height:4px;background:#e9a000;margin:auto;"></div>
+            </div>
         </div>
 
+        <!-- INFORMASI SEKOLAH -->
         <div class="row g-5 align-items-center" data-aos="fade-up">
-
             <div class="col-lg-5">
                 @if($profil && $profil->foto)
-                    <img src="/storage/{{ $profil->foto }}"
-                         alt="{{ $profil->nama_sekolah }}"
-                         style="width:100%;height:350px;object-fit:cover;border-radius:15px;">
+                    <img src="/storage/{{ $profil->foto }}" alt="{{ $profil->nama_sekolah }}" style="width:100%;height:350px;object-fit:cover;border-radius:15px;">
                 @endif
             </div>
 
             <div class="col-lg-7">
+                <h3 style="color:#005baa;font-weight:700;margin-bottom:25px;">{{ $profil->nama_sekolah ?? '-' }}</h3>
 
-                <h3 style="color:#005baa;font-weight:700;margin-bottom:25px;">
-                    {{ $profil->nama_sekolah ?? '-' }}
-                </h3>
-
-                <p>
-                    <b>Kepala Sekolah</b><br>
-                    {{ $profil->kepala_sekolah ?? '-' }}
-                </p>
-
-                <p>
-                    <b>NPSN</b><br>
-                    {{ $profil->npsn ?? '-' }}
-                </p>
-
-                <p>
-                    <b>Kontak</b><br>
-                    {{ $profil->kontak ?? '-' }}
-                </p>
-
-                <p>
-                    <b>Tahun Berdiri</b><br>
-                    {{ $profil->tahun_berdiri ?? '-' }}
-                </p>
-
-                <p>
-                    <b>Alamat</b><br>
-                    {{ $profil->alamat ?? '-' }}
-                </p>
-
+                <p><b>Kepala Sekolah</b><br>{{ $profil->kepala_sekolah ?? '-' }}</p>
+                <p><b>NPSN</b><br>{{ $profil->npsn ?? '-' }}</p>
+                <p><b>Kontak</b><br>{{ $profil->kontak ?? '-' }}</p>
+                <p><b>Tahun Berdiri</b><br>{{ $profil->tahun_berdiri ?? '-' }}</p>
+                <p><b>Alamat</b><br>{{ $profil->alamat ?? '-' }}</p>
             </div>
-
         </div>
 
+        <!-- VISI DAN MISI -->
         <div style="margin-top:60px;" data-aos="fade-up">
-
-            <span style="color:#e99b00;font-size:14px;letter-spacing:2px;">
-                TENTANG SEKOLAH
-            </span>
-
-            <h2 style="color:#005baa;font-size:30px;font-weight:700;margin-top:5px;">
-                Visi dan Misi
-            </h2>
-
+            <span style="color:#e99b00;font-size:14px;letter-spacing:2px;">TENTANG SEKOLAH</span>
+            <h2 style="color:#005baa;font-size:30px;font-weight:700;margin-top:5px;">Visi dan Misi</h2>
             <div style="width:150px;height:4px;background:#e9a000;margin:12px 0 25px;"></div>
 
             <p style="color:#555;font-size:16px;line-height:1.9;white-space:pre-line;">
                 {{ $profil->visi_misi ?? '-' }}
             </p>
-
         </div>
 
+        <!-- KOMITMEN SEKOLAH -->
         <div style="margin-top:50px;" data-aos="fade-up">
+            <span style="color:#e99b00;font-size:14px;letter-spacing:2px;">NILAI DAN DEDIKASI</span>
+            <h2 style="color:#005baa;font-size:30px;font-weight:700;margin-top:5px;">Komitmen Sekolah</h2>
+            <div style="width:190px;height:4px;background:#e9a000;margin:12px 0 25px;"></div>
 
-            <span style="color:#e99b00;font-size:14px;letter-spacing:2px;">
-                TENTANG SEKOLAH
-            </span>
+            <p style="color:#555;font-size:16px;line-height:1.9;margin-bottom:20px;">
+                Kami percaya bahwa pendidikan merupakan investasi jangka panjang yang menentukan masa depan generasi bangsa. Oleh karena itu, kami berkomitmen untuk memberikan layanan pendidikan terbaik dengan mengedepankan kualitas, inovasi, dan integritas.
+            </p>
 
-            <h2 style="color:#005baa;font-size:30px;font-weight:700;margin-top:5px;">
-                Deskripsi Sekolah
-            </h2>
+            <p style="color:#555;font-size:16px;line-height:1.9;margin-bottom:0;">
+                Dengan dukungan seluruh civitas akademika, orang tua, dan masyarakat, kami terus berupaya menjadi sekolah yang tidak hanya unggul dalam prestasi, tetapi juga mampu membentuk generasi yang berkarakter, kompeten, dan siap menghadapi tantangan global.
+            </p>
+        </div>
 
+        <!-- DESKRIPSI SEKOLAH -->
+        <div style="margin-top:50px;" data-aos="fade-up">
+            <span style="color:#e99b00;font-size:14px;letter-spacing:2px;">TENTANG SEKOLAH</span>
+            <h2 style="color:#005baa;font-size:30px;font-weight:700;margin-top:5px;">Deskripsi Sekolah</h2>
             <div style="width:180px;height:4px;background:#e9a000;margin:12px 0 25px;"></div>
 
             <p style="color:#555;font-size:16px;line-height:1.9;">
                 {{ $profil->deskripsi ?? '-' }}
             </p>
-
         </div>
 
     </div>

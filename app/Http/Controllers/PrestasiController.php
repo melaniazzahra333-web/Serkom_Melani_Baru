@@ -10,9 +10,6 @@ class PrestasiController extends Controller
 {
     public function index(Request $request)
     {
-        // $prestasis = Prestasi::latest()->get();
-
-        // return view('admin.prestasi.index', compact('prestasis'));
         $search = $request->search;
 
         $prestasis = Prestasi::query()
@@ -97,9 +94,15 @@ public function landing()
 {
     $prestasis = Prestasi::latest()->get();
 
-    return view('landing.prestasi', [
+    return view('landing.prestasi.index', [
         'prestasis' => $prestasis
     ]);
+}
+
+public function detail($id)
+{
+    $prestasi = Prestasi::findOrFail($id);
+    return view('landing.prestasi.detail', compact('prestasi'));
 }
 
 }
